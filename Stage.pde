@@ -24,8 +24,8 @@ class Stage {
       return;
     }
     
-    tileWidth = map.getTileWidth();
-    tileHeight = map.getTileHeight();
+    tileWidth = Calc.scale(map.getTileWidth());
+    tileHeight = Calc.scale(map.getTileHeight());
     tilesPerRow = map.getWidth();
     tilesPerCol = map.getHeight();
     tileLayers = new LinkedList();
@@ -49,17 +49,25 @@ class Stage {
     for (int y = 0; y < tilesPerCol; y++) {
       for (int x = 0; x < tilesPerRow; x++) {
         final Tile tile = layer.getTileAt(x, y);
-        if (tile == null) {
-          continue;
-        }
+        if (tile == null) continue;
         
-        final Image img = tile.getImage();
-        if (img == null) {
-          continue;
-        }
+        final Image rawImg = tile.getImage();
+        if (rawImg == null) continue;
         
-        image(new PImage(img), x * tileWidth, y * tileWidth);
+        PImage img = new PImage(rawImg);
+        img.resize(Calc.scale(tileWidth), Calc.scale(tileHeight));
+        
+        image(img, x * Calc.scale(tileWidth), y * Calc.scale(tileWidth));
       }
     }
   }
+  
+}
+
+static class Calc {
+  public static final double SCALE = 1;
+
+  public static int scale(int n) {
+    return (int) Math.floor(n * Calc.SCALE);
+  };
 }

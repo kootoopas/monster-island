@@ -7,8 +7,8 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-static final int WINDOW_WIDTH = 800;
-static final int WINDOW_HEIGHT = 600;
+static final int WINDOW_WIDTH = 1024;
+static final int WINDOW_HEIGHT = 768;
 
 World world;
 
