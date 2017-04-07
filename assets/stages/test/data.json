@@ -1,0 +1,24 @@
+{
+  "initialGold": 200,
+  "waves": [
+    {
+      "units": {
+        "peasant": 10
+      },
+      "spawnsAt": 0
+    },
+    {
+      "units": {
+        "peasant": 18
+      },
+      "spawnsAt": 30
+    },
+    {
+      "units": {
+        "peasant": 12,
+        "footman": 5
+      },
+      "spawnsAt": 60
+    }
+  ]
+}
