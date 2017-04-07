@@ -11,7 +11,7 @@ class Game extends CustomWorld {
   private Stage stage;
   
   Game(String stageId) {
-    stage = new Stage(stageId);
+    stage = new Stage(stageId, this);
   }
   
   void handleEvent(Being being) {
@@ -23,7 +23,8 @@ class Game extends CustomWorld {
   }
   
   void draw() {
-      background(0);
-      stage.draw();
+    background(0);
+    stage.drawMap();
+    super.draw();
   }
 }

@@ -10,7 +10,7 @@ import hermes.postoffice.*;
 static final int WINDOW_WIDTH = 1024;
 static final int WINDOW_HEIGHT = 768;
 
-World world;
+CustomWorld world;
 
 void setup() {
     size(WINDOW_WIDTH, WINDOW_HEIGHT, JAVA2D);  // set window size
@@ -19,7 +19,7 @@ void setup() {
     // set up the world
     world = new Game("test");
     
-    rectMode(CENTER);
+    rectMode(CORNER);
     
     frameRate(60);
     
@@ -27,6 +27,7 @@ void setup() {
     world.start();
 }
 
-void draw() {  
-    world.draw();
+void draw() {
+  noSmooth();
+  world.draw();
 }
