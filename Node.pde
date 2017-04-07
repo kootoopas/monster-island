@@ -1,0 +1,3 @@
+class Node extends Being {
+  
+}

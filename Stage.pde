@@ -55,7 +55,7 @@ class Stage {
         if (rawImg == null) continue;
         
         PImage img = new PImage(rawImg);
-        img.resize(Calc.scale(tileWidth), Calc.scale(tileHeight));
+//        img.resize(Calc.scale(tileWidth), Calc.scale(tileHeight));
         
         image(img, x * Calc.scale(tileWidth), y * Calc.scale(tileWidth));
       }
