@@ -9,8 +9,26 @@ static class Utils {
     return (int) Math.floor(n * Utils.SCALE);
   };
   
-  static String readFile(String path) throws IOException {
+  public static HRectangle fitIn(HRectangle box, int padding) {
+    PVector pos = box.getPosition();
+    return new HRectangle(
+      pos.x + padding,
+      pos.y + padding,
+      box.getWidth() - padding * 2,
+      box.getHeight() - padding * 2
+    );
+  }
+  
+  public static String readFile(String path) throws IOException {
     byte[] encoded = Files.readAllBytes(Paths.get(path));
     return new String(encoded, Charset.defaultCharset());
   }
+  
+  public static color getTowerColor(int type) {
+    switch (type) {
+      case Tower.ARROW: return Utils.BANANA;
+      default: return Utils.BANANA;
+    }
+  }
 }
+

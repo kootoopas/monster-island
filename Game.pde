@@ -6,6 +6,10 @@ import hermes.postoffice.*;
 
 class Game extends CustomWorld {
   public static final int STAGE_OFFSET = 32;
+
+  public static final int BUY_TOWER = 0;
+  public static final int UPGRADE_TOWER = 1;
+  public static final int SELL_TOWER = 2;
   
   private Stage stage;
   private Player player;
@@ -18,10 +22,6 @@ class Game extends CustomWorld {
 //    mobs = new Mobs
   }
   
-  void handleEvent(Being being) {
-    
-  }
-  
   void setup() {
     stage.setup();
   }
@@ -32,4 +32,15 @@ class Game extends CustomWorld {
     player.drawStats();
     super.draw();
   }
+  
+  void handleEvent(Being being) {
+    println(being.getPosition());
+  }
+  
+  void buyTower(int type, Node node) {
+    player.buyTower(type, node);
+  }
+}
+
+static class Actions {
 }
