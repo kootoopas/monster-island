@@ -81,7 +81,7 @@ class Stage {
           // Extract nodes.
           while (objs.hasNext()) {
             obj = objs.next();
-            nodes.add(new Node((float) _offsetX((int) obj.getX()), (float) _offsetY((int) obj.getY()), world));
+            nodes.add(new Node((float) _offsetX((int) obj.getX()), (float) _offsetY((int) obj.getY()), (Game) world));
           }
         }
       }
@@ -112,16 +112,16 @@ class Stage {
     }
   }
   
+  public void setOffset(int x, int y) {
+    offset = new PVector(x, y);
+  }
+  
   private float _offsetX(int x) {
     return x + offset.x;
   }
   
   private float _offsetY(int y) {
     return y + offset.y;
-  }
-  
-  public void setOffset(int x, int y) {
-    offset = new PVector(x, y);
   }
   
   public LinkedList<PVector> getPath() {

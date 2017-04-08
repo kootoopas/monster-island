@@ -1,4 +1,8 @@
 static class Utils {
+  public static final color VERY_DARK_VIOLET = #17111D;
+  public static final color FADED_RED = #D3494E;
+  public static final color BANANA = #E3CF57;
+  
   public static final double SCALE = 1;
 
   public static int scale(int n) {

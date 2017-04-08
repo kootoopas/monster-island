@@ -7,8 +7,8 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-static final int WINDOW_WIDTH = 1024;
-static final int WINDOW_HEIGHT = 768;
+static final int WINDOW_WIDTH = 544;
+static final int WINDOW_HEIGHT = 512;
 
 CustomWorld world;
 
@@ -20,7 +20,7 @@ void setup() {
     world = new Game("test");
     
     rectMode(CORNER);
-    frameRate(60);
+    frameRate(50);
     
     //Sets up and starts world
     world.start();

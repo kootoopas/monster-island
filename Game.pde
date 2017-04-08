@@ -27,7 +27,7 @@ class Game extends CustomWorld {
   }
   
   void draw() {
-    background(0);
+    background(Utils.VERY_DARK_VIOLET);
     stage.drawMap();
     player.drawStats();
     super.draw();
