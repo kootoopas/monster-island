@@ -20,7 +20,6 @@ void setup() {
     world = new Game("test");
     
     rectMode(CORNER);
-    
     frameRate(60);
     
     //Sets up and starts world
