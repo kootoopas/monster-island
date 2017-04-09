@@ -8,7 +8,10 @@ class Tower extends Being {
   
   private Game game;
   private Node node;
+  
   private int type;
+  private int lvl;
+  
   private color background;
   
   Tower(int type, Node node, Game game) {
@@ -16,11 +19,13 @@ class Tower extends Being {
     
     this.game = game;
     this.node = node;
-    this.type = type;
-    this.background = Utils.getTowerColor(type);
     
-    this.game.delete(node);
-    this.node.getCtrls().hide();
+    this.type = type;
+    this.lvl = 1;
+    
+    this.background = Utils.getTowerColor(type);
+
+    this.node.unregister();
     this.game.register(this);
   }
   
