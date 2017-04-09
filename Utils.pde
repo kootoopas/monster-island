@@ -1,4 +1,5 @@
 static class Utils {
+  // From dawnbringer's pallete: http://pixeljoint.com/forum/forum_posts.asp?TID=12795
   public static final color VERY_DARK_VIOLET = #17111D;
   public static final color FADED_RED = #D3494E;
   public static final color BANANA = #E3CF57;
