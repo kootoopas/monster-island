@@ -66,7 +66,7 @@ class Stage {
     for (MapLayer layer : map) {
       if (layer instanceof TileLayer) {
         // Read tile layer and create an image of its tiles.
-        _createTileLayerImg((TileLayer) layer);
+        _buildTileLayerImg((TileLayer) layer);
       } else if (layer instanceof ObjectGroup) {
         String layerName = layer.getName();
         Iterator<MapObject> objs = ((ObjectGroup) layer).getObjects();
@@ -97,7 +97,7 @@ class Stage {
     }
   }
   
-  private void _createTileLayerImg(TileLayer layer) {
+  private void _buildTileLayerImg(TileLayer layer) {
     PGraphics img = createGraphics(getWidth(), getHeight(), JAVA2D);
     img.beginDraw();
     
