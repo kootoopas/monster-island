@@ -31,6 +31,7 @@ class Game extends CustomWorld {
     background(Utils.VERY_DARK_VIOLET);
     player.drawStats();
     stage.drawMap();
+    // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objects
     super.draw();
   }
   
