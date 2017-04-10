@@ -30,10 +30,9 @@ class Node extends Being {
       if (hovered
           || active && po.isMouseInRegion(ctrls.getShape())) {
         ctrls.show();
-        active = true;
+        activate();
       } else {
-        ctrls.hide();
-        active = false;
+        deactivate();
       }
     }
   }
@@ -67,8 +66,19 @@ class Node extends Being {
     return active;
   }
   
+  public void activate() {
+    ctrls.show();
+    active = true;
+  }
+  
   public void deactivate() {
+    ctrls.hide();
     active = false;
+  }
+  
+  public void unregister() {
+    game.delete(this);
+    deactivate();
   }
 }
 

@@ -1,3 +1,5 @@
+import java.nio.charset.*;
+
 static class Utils {
   // From dawnbringer's pallete: http://pixeljoint.com/forum/forum_posts.asp?TID=12795
   public static final color VERY_DARK_VIOLET = #17111D;
@@ -30,6 +32,10 @@ static class Utils {
       case Tower.ARROW: return Utils.BANANA;
       default: return Utils.BANANA;
     }
+  }
+  
+  public static String pluralize(String word) {
+    return word + "s";
   }
 }
 

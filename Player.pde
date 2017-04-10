@@ -18,7 +18,7 @@ class Player {
   public void drawStats() {
     fill(Utils.FADED_RED);
     textSize(16);
-    _topText(String.valueOf(hp) + "HP", 10);
+    _topText(hp + "HP", 10);
     
     fill(Utils.BANANA);
     textSize(16);
@@ -47,7 +47,6 @@ class Player {
     Tower tower = new Tower(type, node, game);
     towers.add(tower);
     node.setTower(tower);
-    node.deactivate();
     
   }
   

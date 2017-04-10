@@ -1,0 +1,8 @@
+{
+  "hp": 100,
+  "atk": 20,
+  "hitrate": 200,
+  "def": 20,
+  "defType": "basic",
+  "spd": 30
+}

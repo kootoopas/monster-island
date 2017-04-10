@@ -12,6 +12,7 @@ class Game extends CustomWorld {
   public static final int SELL_TOWER = 2;
   
   private Stage stage;
+  private WaveSequence waveSeq;
   private Player player;
   
   Game(String stageId) {
@@ -19,7 +20,7 @@ class Game extends CustomWorld {
     stage.setOffset(0, Game.STAGE_OFFSET);
     
     player = new Player(stage.getInitialGold(), this);
-//    mobs = new Mobs
+    waveSeq = new WaveSequence(stage.getWavedataArray());
   }
   
   void setup() {
@@ -28,8 +29,8 @@ class Game extends CustomWorld {
   
   void draw() {
     background(Utils.VERY_DARK_VIOLET);
-    stage.drawMap();
     player.drawStats();
+    stage.drawMap();
     super.draw();
   }
   

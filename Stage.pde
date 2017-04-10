@@ -1,14 +1,13 @@
 import java.util.*;
 import java.awt.*;
 import java.nio.file.*;
-import java.nio.charset.*;
 import tiled.core.Map;
 import tiled.core.MapLayer;
 import tiled.core.TileLayer;
 import tiled.io.TMXMapReader;
 
 class Stage {
-  public static final String STAGES_DIR = "/Users/Fotis/workspace/city/s6/gamesmedia/monster-island/products/code/MonsterIsland/assets/stages";
+  public static final String STAGES_DIR = "stages";
   public static final String STAGE_DATAFILE = "data.json";
   
   public static final String PATH = "path";
@@ -27,22 +26,21 @@ class Stage {
   private LinkedList<TileLayer> tileLayers;
   
   private Group<Node> nodes;
-  private LinkedList<PVector> path;
+  private Path path;
   private int initialGold;
-  // private WaveSeq waves
+  private JSONArray wavedataArray;
 
   Stage(String id, CustomWorld world) {
     this.id = id;
     this.world = world;
     
     try {
-      this.map = new TMXMapReader().readMap(STAGES_DIR + "/" + id + "/" + id + ".tmx");
+      this.map = new TMXMapReader().readMap(dataPath(STAGES_DIR + "/" + id + "/" + id + ".tmx"));
     } catch (Exception e) {
       println("Error while reading the map:\n" + e.getMessage());
       return;
     }
     
-    this.offset = new PVector(0, 0);
     this.tileWidth = Utils.scale(map.getTileWidth());
     this.tileHeight = Utils.scale(map.getTileHeight());
     this.tilesPerRow = map.getWidth();
@@ -50,11 +48,16 @@ class Stage {
     this.tileLayers = new LinkedList();
     
     this.nodes = new Group(world);
-    this.path = new LinkedList();
+    this.path = new Path();
     
     try {
-      JSONObject stageData = parseJSONObject(Utils.readFile(STAGES_DIR + "/" + id + "/" + STAGE_DATAFILE));
-      this.initialGold = stageData.getInt("initialGold");
+      JSONObject stagedata = parseJSONObject(
+        Utils.readFile(
+          dataPath(STAGES_DIR + "/" + id + "/" + STAGE_DATAFILE)
+        )
+      );
+      this.initialGold = stagedata.getInt("initialGold");
+      this.wavedataArray = stagedata.getJSONArray("waves");
     } catch (IOException e) {
       println("Error while reading the map:\n" + e.getMessage());
       return;
@@ -73,6 +76,8 @@ class Stage {
         
         if (layerName.equals(PATH)) {
           // Extract path.
+          // XXX: Path is represented poorly by tiled rectangle points. Should be a polyline, but libtiled doesn't
+          //      support polyline parsing right now (04/2017). Maybe copy-pasta polyline parsing code from libgdx?
           while (objs.hasNext()) {
             obj = objs.next();
             path.add(new PVector((float) _offsetX((int) obj.getX()), (float) _offsetY((int) obj.getY())));
@@ -124,11 +129,34 @@ class Stage {
     return y + offset.y;
   }
   
-  public LinkedList<PVector> getPath() {
+  public Path getPath() {
     return path;
   }
   
   public int getInitialGold() {
     return initialGold;
   }
+  
+  public JSONArray getWavedataArray() {
+    return wavedataArray;
+  }
 }
+
+
+class Path extends LinkedList<PVector> {  
+  Path() {
+    super();
+  }
+  
+  public PVector getSpawnpoint() {
+    return getFirst();
+  }
+  
+  public PVector getGuardpoint() {
+    return getLast();
+  }
+}
+
+// TODO: Move map related code to these on a late refactor.
+class MapParser {}
+class MapRenderer {}
