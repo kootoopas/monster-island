@@ -53,7 +53,7 @@ abstract class Unit extends Being {
   }
   
   protected String getDataPath() {
-    return Utils.pluralize(typeToString()) + "/" + idToString(); 
+    return Utils.pluralize(UnitUtils.typeToString(type)) + "/" + UnitUtils.idToString(id); 
   }
   
   private void _setUnitData() {
@@ -65,22 +65,6 @@ abstract class Unit extends Being {
       );
     } catch(IOException e) {
       println(e);
-    }
-  }
-  
-  public String idToString() {
-    switch(id) {
-      case UnitUtils.PEASANT: return "peasant";
-      case UnitUtils.FOOTMAN: return "footman";
-      default: return "peasant";
-    }
-  }
-  
-  public String typeToString() {
-    switch(type) {
-      case UnitUtils.CREEP: return "creep";
-      case UnitUtils.GUARD: return "guard";
-      default: return "creep";
     }
   }
   
@@ -109,4 +93,30 @@ static class UnitUtils {
   public static final String GUARDS_SUBDIR = "guards";
   public static final String CREEPS_SUBDIR = "creeps";
   public static final String DATAFILE = "data.json";
+  
+  public static String idToString(int id) {
+    switch(id) {
+      case UnitUtils.PEASANT: return "peasant";
+      case UnitUtils.FOOTMAN: return "footman";
+      default: return "peasant";
+    }
+  }
+  
+  public static int stringToId(String str) {
+    if (str.equals("peasant")) {
+      return UnitUtils.PEASANT;
+    } else if (str.equals("footman")) {
+      return UnitUtils.FOOTMAN;
+    } else {
+      return UnitUtils.PEASANT;
+    }
+  }
+  
+  public static String typeToString(int type) {
+    switch(type) {
+      case UnitUtils.CREEP: return "creep";
+      case UnitUtils.GUARD: return "guard";
+      default: return "creep";
+    }
+  }
 }

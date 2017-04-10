@@ -157,6 +157,7 @@ class Path extends LinkedList<PVector> {
   }
 }
 
+
 // TODO: Move map related code to these on a late refactor.
 class MapParser {}
 class MapRenderer {}

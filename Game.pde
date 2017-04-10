@@ -20,11 +20,11 @@ class Game extends CustomWorld {
     stage.setOffset(0, Game.STAGE_OFFSET);
     
     player = new Player(stage.getInitialGold(), this);
-    waveSeq = new WaveSequence(stage.getWavedataArray());
   }
   
   void setup() {
     stage.setup();
+    waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
   }
   
   void draw() {
