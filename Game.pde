@@ -4,7 +4,7 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-class Game extends CustomWorld {
+class Game extends CWorld {
   public static final int STAGE_OFFSET = 32;
 
   public static final int BUY_TOWER = 0;

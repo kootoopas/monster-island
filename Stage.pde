@@ -14,7 +14,7 @@ class Stage {
   public static final String NODES = "nodes";
   
   private String id;
-  private CustomWorld world;
+  private CWorld world;
   
   private PVector offset;
   
@@ -30,7 +30,7 @@ class Stage {
   private int initialGold;
   private JSONArray wavedataArray;
 
-  Stage(String id, CustomWorld world) {
+  Stage(String id, CWorld world) {
     this.id = id;
     this.world = world;
     

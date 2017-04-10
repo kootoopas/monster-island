@@ -4,7 +4,7 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-class MainMenu extends CustomWorld {
+class MainMenu extends CWorld {
   
   void handleEvent(Being being) {
   

@@ -10,7 +10,7 @@ import hermes.postoffice.*;
 static final int WINDOW_WIDTH = 544;
 static final int WINDOW_HEIGHT = 512;
 
-CustomWorld initialWorld;
+CWorld initialWorld;
 
 void setup() {
     size(WINDOW_WIDTH, WINDOW_HEIGHT, JAVA2D);  // set window size

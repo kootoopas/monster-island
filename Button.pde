@@ -8,13 +8,13 @@ class Button extends Being {
   public static final int HIDDEN = 0;
   public static final int VISIBLE = 1;
   
-  private CustomWorld world;
+  private CWorld world;
 
-  public Button(HShape shape, CustomWorld world) {
+  public Button(HShape shape, CWorld world) {
     this(shape, VISIBLE, world);
   }
 
-  public Button(HShape shape, int visibility, CustomWorld world) {
+  public Button(HShape shape, int visibility, CWorld world) {
     super(shape);
     this.world = world;
     
@@ -34,12 +34,12 @@ class ShapeButton extends Button {
 
   private color backgroundColor;
 
-  ShapeButton(HShape shape, color backgroundColor, CustomWorld world) {
+  ShapeButton(HShape shape, color backgroundColor, CWorld world) {
     super(shape, world);
     this.backgroundColor = backgroundColor;
   }
 
-  ShapeButton(HShape shape, color backgroundColor, int visibility, CustomWorld world) {
+  ShapeButton(HShape shape, color backgroundColor, int visibility, CWorld world) {
     super(shape, visibility, world);
     this.backgroundColor = backgroundColor;
   }
@@ -60,7 +60,7 @@ class TextButton extends Button {
 
   private String text;
 
-  public TextButton(int x, int y, String text, CustomWorld world) {
+  public TextButton(int x, int y, String text, CWorld world) {
     super(new HRectangle(x, y, WIDTH, HEIGHT), world);
     this.text = text;
   }

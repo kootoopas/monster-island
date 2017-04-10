@@ -140,7 +140,7 @@ class BuyButton extends ShapeButton {
   private Game game;
   
   BuyButton(HShape shape, int type, Node node, Game game) {
-    super(shape, Utils.getTowerColor(type), Button.HIDDEN, (CustomWorld) game);
+    super(shape, Utils.getTowerColor(type), Button.HIDDEN, (CWorld) game);
     this.type = type;
     this.node = node;
     this.game = game;

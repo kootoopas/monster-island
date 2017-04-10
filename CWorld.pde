@@ -4,9 +4,9 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-abstract class CustomWorld extends World implements EventHandler {
+abstract class CWorld extends World implements EventHandler {
     
-  void switchTo(CustomWorld nextWorld) {
+  void switchTo(CWorld nextWorld) {
     this.deactivate();
     nextWorld.start();
   }

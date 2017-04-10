@@ -1,4 +1,4 @@
-class WaveSequence {
+  class WaveSequence {
   private Game game;
   
   private LinkedList<Wave> waves;

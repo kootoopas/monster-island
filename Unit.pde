@@ -1,6 +1,6 @@
 abstract class Unit extends Being {
 
-  protected CustomWorld world;
+  protected CWorld world;
   
   protected int id;
   protected int type;
@@ -9,7 +9,7 @@ abstract class Unit extends Being {
   
   protected JSONObject data;
 
-  Unit(int id, int type, PVector spawnpoint, CustomWorld world) {
+  Unit(int id, int type, PVector spawnpoint, CWorld world) {
     super(new HRectangle(spawnpoint.x - 8, spawnpoint.y - 10, 16, 20));
     this.world = world;
     this.type = type;
@@ -76,7 +76,7 @@ abstract class Unit extends Being {
 
 
 class Creep extends Unit {
-  Creep(int id, PVector spawnpoint, CustomWorld world) {
+  Creep(int id, PVector spawnpoint, CWorld world) {
     super(id, UnitUtils.CREEP, spawnpoint, world);
   }
 }
