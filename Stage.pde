@@ -23,10 +23,10 @@ class Stage {
   private int tileHeight;
   private int tilesPerRow;
   private int tilesPerCol;
-  private LinkedList<TileLayer> tileLayers;
+  private LinkedList<PImage> layerImgs = new LinkedList();
   
   private Group<Node> nodes;
-  private Path path;
+  private Path path = new Path();
   private int initialGold;
   private JSONArray wavedataArray;
 
@@ -45,10 +45,8 @@ class Stage {
     this.tileHeight = Utils.scale(map.getTileHeight());
     this.tilesPerRow = map.getWidth();
     this.tilesPerCol = map.getHeight();
-    this.tileLayers = new LinkedList();
     
     this.nodes = new Group(world);
-    this.path = new Path();
     
     try {
       JSONObject stagedata = parseJSONObject(
@@ -67,8 +65,8 @@ class Stage {
   void setup() {
     for (MapLayer layer : map) {
       if (layer instanceof TileLayer) {
-        // Extract tile layers.
-        tileLayers.add((TileLayer) layer);
+        // Read tile layer and create an image of its tiles.
+        _createTileLayerImg((TileLayer) layer);
       } else if (layer instanceof ObjectGroup) {
         String layerName = layer.getName();
         Iterator<MapObject> objs = ((ObjectGroup) layer).getObjects();
@@ -94,12 +92,15 @@ class Stage {
   }
   
   void drawMap() {
-    for (TileLayer layer : tileLayers) {
-      _drawTileLayer(layer);
+    for (PImage img : layerImgs) {
+      _drawLayerImg(img);
     }
   }
   
-  private void _drawTileLayer(TileLayer layer) {
+  private void _createTileLayerImg(TileLayer layer) {
+    PGraphics img = createGraphics(getWidth(), getHeight(), JAVA2D);
+    img.beginDraw();
+    
     for (int y = 0; y < tilesPerCol; y++) {
       for (int x = 0; x < tilesPerRow; x++) {
         final Tile tile = layer.getTileAt(x, y);
@@ -108,13 +109,20 @@ class Stage {
         final Image rawImg = tile.getImage();
         if (rawImg == null) continue;
         
-        PImage img = new PImage(rawImg);
+        PImage tileImg = new PImage(rawImg);
 // TODO: Enable if pixelart resize is added      
 //        img.resize(Utils.scale(tileWidth), Utils.scale(tileHeight));
         
-        image(img, _offsetX(x * Utils.scale(tileWidth)), _offsetY(y * Utils.scale(tileWidth)));
+        img.image(tileImg, x * Utils.scale(tileWidth), y * Utils.scale(tileWidth));
       }
     }
+
+    img.endDraw();    
+    layerImgs.add(img.get());
+  }
+  
+  private void _drawLayerImg(PImage img) {
+    image(img, _offsetX(0), _offsetY(0));
   }
   
   public void setOffset(int x, int y) {
@@ -127,6 +135,14 @@ class Stage {
   
   private float _offsetY(int y) {
     return y + offset.y;
+  }
+  
+  public int getWidth() {
+    return tilesPerRow * Utils.scale(tileWidth);
+  }
+  
+  public int getHeight() {
+    return tilesPerCol * Utils.scale(tileHeight);
   }
   
   public Path getPath() {

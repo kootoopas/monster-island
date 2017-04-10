@@ -29,6 +29,7 @@ class Game extends CWorld {
   
   void draw() {
     background(Utils.VERY_DARK_VIOLET);
+
     player.drawStats();
     stage.drawMap();
     // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objects

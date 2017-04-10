@@ -73,6 +73,10 @@ abstract class Unit extends Being {
     }
   }
   
+  public void update() {
+    setY(getY() - 2);
+  }
+  
   public void draw() {
     fill(Utils.FADED_RED);
     _shape.draw();

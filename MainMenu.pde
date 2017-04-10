@@ -10,7 +10,10 @@ class MainMenu extends CWorld {
   
   }
   
+  void setup() {
+  }
+  
   void draw() {
-      background(#000000);
+    background(#000000);
   }
 }
