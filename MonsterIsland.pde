@@ -27,6 +27,7 @@ void setup() {
 }
 
 void draw() {
+
   noSmooth();
   initialWorld.draw();
 }

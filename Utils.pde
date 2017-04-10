@@ -37,5 +37,9 @@ static class Utils {
   public static String pluralize(String word) {
     return word + "s";
   }
+  
+  public static int millisToSecs(int millis) {
+    return (int) (millis * .001);
+  }
 }
 

@@ -2,24 +2,25 @@ abstract class Unit extends Being {
 
   protected CWorld world;
   
-  protected int id;
   protected int type;
+  protected int family;
   protected Stats stats;
   protected int dmgReceipt;
   
   protected JSONObject data;
 
-  Unit(int id, int type, PVector spawnpoint, CWorld world) {
+  Unit(int type, int family, PVector spawnpoint, CWorld world) {
     super(new HRectangle(spawnpoint.x - 8, spawnpoint.y - 10, 16, 20));
     this.world = world;
+    this.family = family;
     this.type = type;
-    this.id = id;
     
     _setUnitData();
     this.stats = new Stats();
     this.dmgReceipt = 0;
     
     this.world.register(this);
+//    println(this + " " + millis());
   }
   
   protected class Stats {
@@ -52,8 +53,12 @@ abstract class Unit extends Being {
     return stats.hp - dmgReceipt > 0;
   }
   
+  public int getRemainingHp() {
+    return stats.hp - dmgReceipt;
+  }
+  
   protected String getDataPath() {
-    return Utils.pluralize(UnitUtils.typeToString(type)) + "/" + UnitUtils.idToString(id); 
+    return Utils.pluralize(UnitUtils.familyToString(family)) + "/" + UnitUtils.typeToString(type);
   }
   
   private void _setUnitData() {
@@ -72,12 +77,16 @@ abstract class Unit extends Being {
     fill(Utils.FADED_RED);
     _shape.draw();
   }
+  
+  public String toString() {
+    return UnitUtils.typeToString(type) + "(hp=" + getRemainingHp() + "/" + stats.hp + ")";
+  }
 }
 
 
 class Creep extends Unit {
-  Creep(int id, PVector spawnpoint, CWorld world) {
-    super(id, UnitUtils.CREEP, spawnpoint, world);
+  Creep(int type, PVector spawnpoint, CWorld world) {
+    super(type, UnitUtils.CREEP, spawnpoint, world);
   }
 }
 
@@ -94,15 +103,15 @@ static class UnitUtils {
   public static final String CREEPS_SUBDIR = "creeps";
   public static final String DATAFILE = "data.json";
   
-  public static String idToString(int id) {
-    switch(id) {
+  public static String typeToString(int type) {
+    switch(type) {
       case UnitUtils.PEASANT: return "peasant";
       case UnitUtils.FOOTMAN: return "footman";
       default: return "peasant";
     }
   }
   
-  public static int stringToId(String str) {
+  public static int stringToType(String str) {
     if (str.equals("peasant")) {
       return UnitUtils.PEASANT;
     } else if (str.equals("footman")) {
@@ -112,8 +121,8 @@ static class UnitUtils {
     }
   }
   
-  public static String typeToString(int type) {
-    switch(type) {
+  public static String familyToString(int family) {
+    switch(family) {
       case UnitUtils.CREEP: return "creep";
       case UnitUtils.GUARD: return "guard";
       default: return "creep";
