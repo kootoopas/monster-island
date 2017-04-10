@@ -15,7 +15,7 @@ abstract class Unit extends Being {
     this.family = family;
     this.type = type;
     
-    _setUnitData();
+    _extractUnitData();
     this.stats = new Stats();
     this.dmgReceipt = 0;
     
@@ -61,7 +61,7 @@ abstract class Unit extends Being {
     return Utils.pluralize(UnitUtils.familyToString(family)) + "/" + UnitUtils.typeToString(type);
   }
   
-  private void _setUnitData() {
+  private void _extractUnitData() {
     try {
       data = parseJSONObject(
         Utils.readFile(
