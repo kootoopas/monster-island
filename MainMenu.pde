@@ -6,14 +6,10 @@ import hermes.postoffice.*;
 
 class MainMenu extends CWorld {
   
-  void handleEvent(Being being) {
-  
-  }
-  
   void setup() {
   }
   
   void draw() {
-    background(#000000);
+    background(#ffffff);
   }
 }

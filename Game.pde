@@ -15,7 +15,7 @@ class Game extends CWorld {
   private WaveSequence waveSeq;
   private Player player;
   
-  Game(String stageId) {
+  Game(String stageId) {    
     stage = new Stage(stageId, this);
     stage.setOffset(0, Game.STAGE_OFFSET);
     
@@ -30,8 +30,10 @@ class Game extends CWorld {
   void draw() {
     background(Utils.VERY_DARK_VIOLET);
 
+    // Manually draw non-Beings.
     player.drawStats();
     stage.drawMap();
+    
     // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objects
     super.draw();
   }

@@ -57,6 +57,8 @@ class Wave extends Group<Creep> {
   }
   
   public void update() {
+    if (millis() > 2300) game.transitionTo(new MainMenu());
+    
     if (spawning == NOT_YET
         && _spawntimeIsNow()) {
       spawning = YES;

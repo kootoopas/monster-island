@@ -10,23 +10,23 @@ import hermes.postoffice.*;
 static final int WINDOW_WIDTH = 544;
 static final int WINDOW_HEIGHT = 512;
 
-CWorld initialWorld;
+CWorldManager worldManager;
 
 void setup() {
     size(WINDOW_WIDTH, WINDOW_HEIGHT, JAVA2D);  // set window size
     Hermes.setPApplet(this);            // give the library the PApplet
     
     // set up the world
-    initialWorld = new Game("test");
+    worldManager = new CWorldManager();
+    worldManager.setInitialWorld(new Game("test"));
     
     rectMode(CORNER);
     frameRate(50);
     
-    //Sets up and starts world
-    initialWorld.start();
+    worldManager.start();
 }
 
 void draw() {
   noSmooth();
-  initialWorld.draw();
+  worldManager.draw();
 }
