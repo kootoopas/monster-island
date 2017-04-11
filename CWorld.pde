@@ -8,6 +8,9 @@ abstract class CWorld extends World implements EventHandler {
   
   private CWorldManager manager;
   
+  /**
+   * Should be only used internally by CWorldManager.
+   */
   public void setManager(CWorldManager manager) {
     this.manager = manager;
   }

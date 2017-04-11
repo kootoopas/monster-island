@@ -10,6 +10,8 @@ class MainMenu extends CWorld {
   }
   
   void draw() {
-    background(#ffffff);
+    background(Utils.VERY_DARK_VIOLET);
+    fill(#ffffff);
+    text("Main Menu", 32, 32);
   }
 }
