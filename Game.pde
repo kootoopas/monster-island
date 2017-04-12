@@ -49,3 +49,4 @@ class Game extends CWorld {
 
 static class Actions {
 }
+

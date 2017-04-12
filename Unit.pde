@@ -5,7 +5,8 @@ abstract class Unit extends Being {
   protected int type;
   protected int family;
   protected Stats stats;
-  protected int dmgReceipt;
+  protected Movement movement;
+  protected int dmgReceipt = 0;
   
   protected JSONObject data;
 
@@ -16,8 +17,7 @@ abstract class Unit extends Being {
     this.type = type;
     
     _extractUnitData();
-    this.stats = new Stats();
-    this.dmgReceipt = 0;
+    this.stats = new Stats();    
     
     this.world.register(this);
 //    println(this + " " + millis());
@@ -29,7 +29,7 @@ abstract class Unit extends Being {
     public int hitrate;
     public int def;
     public String defType;
-    public int spd;
+    public float spd;
     
     Stats() {
       this.hp = data.getInt("hp");
@@ -37,7 +37,7 @@ abstract class Unit extends Being {
       this.hitrate = data.getInt("hitrate");
       this.def = data.getInt("def");
       this.defType = data.getString("defType");
-      this.spd = data.getInt("spd");
+      this.spd = data.getFloat("spd");
     }
   }
 
@@ -73,13 +73,25 @@ abstract class Unit extends Being {
     }
   }
   
+  public void setDest(PVector dest) {
+    movement.setDest(dest);
+  }
+  
+  public boolean destReached() {
+    return movement.destReached();
+  }
+  
   public void update() {
-    setY(getY() - 2);
+    movement.update();
   }
   
   public void draw() {
     fill(Utils.FADED_RED);
     _shape.draw();
+  }
+  
+  public void unregister() {
+    world.delete(this);
   }
   
   public String toString() {
@@ -89,9 +101,123 @@ abstract class Unit extends Being {
 
 
 class Creep extends Unit {
-  Creep(int type, PVector spawnpoint, CWorld world) {
-    super(type, UnitUtils.CREEP, spawnpoint, world);
+  
+  private CreepMovement creepMovement;
+  
+  Creep(int type, Path path, CWorld world) {
+    super(type, UnitUtils.CREEP, path.getSpawnpoint(), world);
+    this.movement = new CreepMovement(this, path);
+    // XXX: Dirty typecasting over here.
+    this.creepMovement = (CreepMovement) this.movement;
+    // FIXME: convert path linkedlist to arraylist?
   }
+  
+  public CreepMovement getMovement() {
+    return creepMovement;
+  }
+}
+
+
+class UnitMovement implements Movement {
+  
+  private Unit unit;
+  protected int status = Movement.STILL;
+  protected float spd;
+  protected PVector dest;
+  private boolean destReached = false;
+
+  public UnitMovement(Unit unit) {
+    this.unit = unit;
+    this.spd = unit.getStats().spd;
+    this.dest = unit.getPosition();
+  }
+
+  public void update() {
+    if (destReached()) return;
+    
+    float dx = dest.x - unit.getX();
+    float dy = dest.y - unit.getY();
+    float dist = sqrt(dx * dx + dy * dy);
+
+    if (dist > spd) {
+      float ratio = spd / dist;
+      float xMove = ratio * dx; 
+      float yMove = ratio * dy;
+      unit.setX(xMove + unit.getX());  
+      unit.setY(yMove + unit.getY());
+    } else {
+      unit.setPosition(dest);
+      destReached = true;
+    }
+    
+//    if (unit.getX() < dest.x) {
+//      unit.setX(unit.getX() + spd);
+//    } else if (unit.getX() > dest.x) {
+//      unit.setX(unit.getX() - spd);
+//    }
+//    
+//    if (unit.getY() < dest.y) {
+//      unit.setY(unit.getY() + spd);
+//    } else if (unit.getY() > dest.y) {
+//      unit.setY(unit.getY() - spd);
+//    }
+    
+    // IDEA: Berserk shaky movement mode (works for non distance checking movement though :/)
+    //       if unit.getX() > dest.x is removed the unit moves in a shaky freaky way.
+  }
+  
+  public void setDest(PVector nextDest) {
+    if (!dest.equals(nextDest)) {
+      destReached = false;
+      dest = nextDest;
+    }
+  }
+  
+  public boolean destReached() {
+    return destReached;
+  }
+}
+
+
+class CreepMovement extends UnitMovement {
+  
+  // Dest is initially set to 2nd point of path. (since every creep moves from there first)
+  private Iterator pathIter;
+  private Creep creep;
+  
+  public CreepMovement(Creep creep, Path path) {
+    super((Unit) creep);
+    this.creep = creep;
+    this.pathIter = path.iterator();
+    
+    // Skip spawnpoint
+    this.pathIter.next();
+    
+    this.setDest((PVector) pathIter.next());
+  }
+
+  public void update() {
+    if (destReached()) {
+      if (pathIter.hasNext()) {
+        setDest((PVector) pathIter.next());
+      } else {
+        creep.unregister();
+      }
+    }
+      
+    super.update();
+  }
+}
+
+
+interface Movement {  
+  static final int STILL = 0;
+  static final int MOVING = 1;
+  static final int INTERRUPTED = 2;
+  
+  void setDest(PVector nextDest);
+  boolean destReached();
+  void update();
 }
 
 

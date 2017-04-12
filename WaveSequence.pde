@@ -33,7 +33,7 @@ class Wave extends Group<Creep> {
 
   private int currTypeI = -1;
   private int currTypeRemainingCreeps = 0;
-  private int CREEP_SPAWN_TIMESTEP = 200;
+  private int CREEP_SPAWN_TIMESTEP = 300;
   private int lastCreepSpawn = CREEP_SPAWN_TIMESTEP;
 
   
@@ -86,7 +86,8 @@ class Wave extends Group<Creep> {
       }
     }
     
-    add(new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), _randomNearbyOffset(path.getSpawnpoint()), (CWorld) game));
+    Creep nextCreep = new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), path, (CWorld) game);
+    add(nextCreep);
     
     // Monitor when this creep spawned.
     lastCreepSpawn = millis();
