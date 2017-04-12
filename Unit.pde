@@ -101,19 +101,12 @@ abstract class Unit extends Being {
 
 
 class Creep extends Unit {
-  
-  private CreepMovement creepMovement;
-  
+
   Creep(int type, Path path, CWorld world) {
     super(type, UnitUtils.CREEP, path.getSpawnpoint(), world);
     this.movement = new CreepMovement(this, path);
     // XXX: Dirty typecasting over here.
-    this.creepMovement = (CreepMovement) this.movement;
     // FIXME: convert path linkedlist to arraylist?
-  }
-  
-  public CreepMovement getMovement() {
-    return creepMovement;
   }
 }
 
@@ -141,7 +134,7 @@ class UnitMovement implements Movement {
 
     if (dist > spd) {
       float ratio = spd / dist;
-      float xMove = ratio * dx; 
+      float xMove = ratio * dx;
       float yMove = ratio * dy;
       unit.setX(xMove + unit.getX());  
       unit.setY(yMove + unit.getY());
@@ -149,18 +142,6 @@ class UnitMovement implements Movement {
       unit.setPosition(dest);
       destReached = true;
     }
-    
-//    if (unit.getX() < dest.x) {
-//      unit.setX(unit.getX() + spd);
-//    } else if (unit.getX() > dest.x) {
-//      unit.setX(unit.getX() - spd);
-//    }
-//    
-//    if (unit.getY() < dest.y) {
-//      unit.setY(unit.getY() + spd);
-//    } else if (unit.getY() > dest.y) {
-//      unit.setY(unit.getY() - spd);
-//    }
     
     // IDEA: Berserk shaky movement mode (works for non distance checking movement though :/)
     //       if unit.getX() > dest.x is removed the unit moves in a shaky freaky way.
