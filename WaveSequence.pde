@@ -10,8 +10,19 @@ class WaveSequence {
   
   public boolean isDone() {
     // Since the last wave is done, the whole sequence is.
-    return this.waves.getLast()
+    return waves.getLast()
       .isDone();
+  }
+  
+  public boolean allCreepsAreDead() {
+    if (!isDone()) return false;
+    
+    ListIterator<Wave> iter = waves.listIterator();
+    while (iter.hasNext()) {
+      if (iter.next().size() > 0) return false;
+    }
+    
+    return true;
   }
 }
 
@@ -60,7 +71,7 @@ class Wave extends Group<Creep> {
     return spawning == DONE;
   }
   
-  public void update() {    
+  public void update() {
     if (spawning == NOT_YET
         && _spawntimeIsNow()) {
       spawning = YES;

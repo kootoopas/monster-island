@@ -29,14 +29,17 @@ class Game extends CWorld {
   
   void postUpdate() {
     if (player.isAlive()) {
-    
+      if (waveSeq.allCreepsAreDead()) {
+        println("Ya won.");
+        transitionTo(new RatingCalculation());
+      }
     } else {
-      transitionTo(new MainMenu());
+      // game over
+      transitionTo(new GameOver());
     }
   }
   
   void draw() {
-    
     background(Utils.VERY_DARK_VIOLET);
 
     // Manually draw non-Beings.

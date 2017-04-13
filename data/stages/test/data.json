@@ -11,14 +11,14 @@
       "creeps": {
         "peasant": 18
       },
-      "spawntime": 5
+      "spawntime": 1
     },
     {
       "creeps": {
         "peasant": 12,
         "footman": 5
       },
-      "spawntime": 11
+      "spawntime": 2
     }
   ]
 }
