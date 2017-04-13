@@ -6,11 +6,12 @@ class Player {
   
   private int hp = INITIAL_HP;
   private int gold;
-  private ArrayList<Tower> towers = new ArrayList();
+  private Group<Tower> towers;
   
   Player(int initialGold, Game game) {
     this.gold = initialGold;
     this.game = game;
+    this.towers = new Group(game);
   }
   
   public void drawStats() {
@@ -57,6 +58,10 @@ class Player {
   
   public boolean isAlive() {
     return hp > 0;
+  }
+  
+  public Group<Tower> getTowers() {
+    return towers;
   }
   
   private void _topText(String text, int x) {

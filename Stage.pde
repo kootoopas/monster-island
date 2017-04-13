@@ -24,7 +24,7 @@ class Stage {
   private int tilesPerRow;
   private int tilesPerCol;
   private LinkedList<PImage> layerImgs = new LinkedList();
-  
+
   private Group<Node> nodes;
   private Path path = new Path();
   private int initialGold;

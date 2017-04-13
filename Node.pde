@@ -4,22 +4,20 @@ class Node extends Being {
   private Game game;
   private PostOffice po;
   
-  private Tower tower;
+  private Tower tower = null;
   
   private NodeCtrls ctrls;
-  private boolean hovered;
-  private boolean active;
+  private boolean hovered = false;
+  private boolean active = false;
   
   Node(float x, float y, Game game) {
     super(new HRectangle(x - SIZE * 0.5, y - SIZE * 0.5, SIZE, SIZE));
     this.game = game;
     this.po = game.getPostOffice();
     
-    this.tower = null;
+//    this.tower = null;
     
     this.ctrls = new NodeCtrls(this, game);
-    this.hovered = false;
-    this.active = false;
     
     this.game.register(this);
     this.game.subscribe(this, POCodes.Button.LEFT);

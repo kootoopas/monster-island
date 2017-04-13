@@ -82,7 +82,11 @@ abstract class Unit extends Being {
   }
   
   public void update() {
-    movement.update();
+    if (isAlive()) {
+      movement.update();    
+    } else {
+      this.unregister();
+    }
   }
   
   public void draw() {

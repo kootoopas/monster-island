@@ -14,6 +14,7 @@ class Game extends CWorld {
   private Stage stage;
   private WaveSequence waveSeq;
   private Player player;
+  private Combat combat;
   
   Game(String stageId) {    
     stage = new Stage(stageId, this);
@@ -24,7 +25,9 @@ class Game extends CWorld {
   
   void setup() {
     stage.setup();
+    
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
+    combat = new Combat(player.getTowers(), waveSeq.getCreeps(), this);
   }
   
   void postUpdate() {
@@ -61,8 +64,5 @@ class Game extends CWorld {
   void dmgPlayer() {
     player.receiveDmg();
   }
-}
-
-static class Actions {
 }
 

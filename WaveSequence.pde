@@ -1,15 +1,19 @@
 class WaveSequence {  
-  private LinkedList<Wave> waves;
+  private LinkedList<Wave> waves = new LinkedList();
+  private Group<Creep> creeps;
+  private Path path;
 
   WaveSequence(JSONArray wavedataArray, Path path, Game game) {
-    this.waves = new LinkedList();
+    this.path = path;
+    this.creeps = new Group(game);
+    
     for (int i = 0; i < wavedataArray.size(); i++) {
-      this.waves.add(new Wave(wavedataArray.getJSONObject(i), path, game));
+      this.waves.add(new Wave(wavedataArray.getJSONObject(i), this, game));
     }
   }
   
   public boolean isDone() {
-    // Since the last wave is done, the whole sequence is.
+    // Since the last wave finished spawning, the whole sequence is.
     return waves.getLast()
       .isDone();
   }
@@ -24,11 +28,24 @@ class WaveSequence {
     
     return true;
   }
+  
+  public Path getPath() {
+    return path;
+  }
+  
+  public Group<Creep> getCreeps() {
+    return creeps;
+  }
+  
+  public void addToCreeps(Creep creep) {
+    creeps.add(creep);
+  }
 }
 
 class Wave extends Group<Creep> {
   
   private Game game;
+  private WaveSequence seq;
 
   /**
    * Spawntime in millis.
@@ -40,8 +57,6 @@ class Wave extends Group<Creep> {
   private static final int DONE = 2;
   private int spawning = NOT_YET;
   
-  private Path path;
-  
   private JSONObject creepdata;
   private String[] creepTypes;
 
@@ -51,10 +66,10 @@ class Wave extends Group<Creep> {
   private int lastCreepSpawn = CREEP_SPAWN_TIMESTEP;
 
   
-  Wave(JSONObject wavedata, Path path, Game game) {
+  Wave(JSONObject wavedata, WaveSequence seq, Game game) {
     super(game);
     this.game = game;
-    this.path = path;
+    this.seq = seq;
     
     // XXX: Assumes that it starts when WaveSequence is constructed (=> "Start Waves" button is clicked).
     this.spawntime = millis() + Utils.secsToMillis(wavedata.getInt("spawntime"));
@@ -64,7 +79,7 @@ class Wave extends Group<Creep> {
     // XXX: Isolate iteration to different object.
     this.creepTypes = _extractCreepTypes();
 
-    game.register(this);
+    this.game.register(this);
   }
   
   public boolean isDone() {
@@ -101,8 +116,10 @@ class Wave extends Group<Creep> {
       }
     }
     
-    Creep nextCreep = new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), path, game);
+    Creep nextCreep = new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), seq.getPath(), game);
     add(nextCreep);
+    seq.addToCreeps(nextCreep);
+
     
     // Monitor when this creep spawned.
     lastCreepSpawn = millis();
