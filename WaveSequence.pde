@@ -14,7 +14,7 @@ class WaveSequence {
       .isDone();
   }
   
-  public boolean allCreepsAreDead() {
+  public boolean areAllCreepsDead() {
     if (!isDone()) return false;
     
     ListIterator<Wave> iter = waves.listIterator();

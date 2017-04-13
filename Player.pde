@@ -1,5 +1,5 @@
 class Player {
-  private static final int INITIAL_HP = 2000;
+  private static final int INITIAL_HP = 20;
   public static final int TOP_TEXT_MARGIN = 21;
   
   private Game game;
