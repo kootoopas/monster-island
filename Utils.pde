@@ -41,5 +41,9 @@ static class Utils {
   public static int millisToSecs(int millis) {
     return (int) (millis * .001);
   }
+  
+  public static int secsToMillis(int secs) {
+    return secs * 1000;
+  }
 }
 

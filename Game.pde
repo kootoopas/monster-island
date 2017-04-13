@@ -27,7 +27,16 @@ class Game extends CWorld {
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
   }
   
+  void postUpdate() {
+    if (player.isAlive()) {
+    
+    } else {
+      transitionTo(new MainMenu());
+    }
+  }
+  
   void draw() {
+    
     background(Utils.VERY_DARK_VIOLET);
 
     // Manually draw non-Beings.
@@ -44,6 +53,10 @@ class Game extends CWorld {
   
   void buyTower(int type, Node node) {
     player.buyTower(type, node);
+  }
+  
+  void dmgPlayer() {
+    player.receiveDmg();
   }
 }
 

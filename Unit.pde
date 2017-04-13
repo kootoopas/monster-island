@@ -1,6 +1,6 @@
 abstract class Unit extends Being {
 
-  protected CWorld world;
+  protected Game game;
   
   protected int type;
   protected int family;
@@ -10,16 +10,16 @@ abstract class Unit extends Being {
   
   protected JSONObject data;
 
-  Unit(int type, int family, PVector spawnpoint, CWorld world) {
+  Unit(int type, int family, PVector spawnpoint, Game game) {
     super(new HRectangle(spawnpoint.x - 8, spawnpoint.y - 10, 16, 20));
-    this.world = world;
+    this.game = game;
     this.family = family;
     this.type = type;
     
     _extractUnitData();
     this.stats = new Stats();    
     
-    this.world.register(this);
+    this.game.register(this);
 //    println(this + " " + millis());
   }
   
@@ -91,7 +91,7 @@ abstract class Unit extends Being {
   }
   
   public void unregister() {
-    world.delete(this);
+    game.delete(this);
   }
   
   public String toString() {
@@ -102,11 +102,15 @@ abstract class Unit extends Being {
 
 class Creep extends Unit {
 
-  Creep(int type, Path path, CWorld world) {
-    super(type, UnitUtils.CREEP, path.getSpawnpoint(), world);
+  Creep(int type, Path path, Game game) {
+    super(type, UnitUtils.CREEP, path.getSpawnpoint(), game);
     this.movement = new CreepMovement(this, path);
     // XXX: Dirty typecasting over here.
     // FIXME: convert path linkedlist to arraylist?
+  }
+  
+  public void dmgPlayer() {
+    game.dmgPlayer();
   }
 }
 
@@ -182,11 +186,16 @@ class CreepMovement extends UnitMovement {
       if (pathIter.hasNext()) {
         setDest((PVector) pathIter.next());
       } else {
-        creep.unregister();
+        _handleGuardpointReach();
       }
     }
-      
+
     super.update();
+  }
+  
+  private void _handleGuardpointReach() {
+    creep.dmgPlayer();
+    creep.unregister();
   }
 }
 

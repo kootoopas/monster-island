@@ -19,7 +19,10 @@ class Wave extends Group<Creep> {
   
   private Game game;
 
-  private int spawnsAt;
+  /**
+   * Spawntime in millis.
+   */
+  private int spawntime;
 
   private static final int NOT_YET = 0;
   private static final int YES = 1;
@@ -42,7 +45,8 @@ class Wave extends Group<Creep> {
     this.game = game;
     this.path = path;
     
-    this.spawnsAt = wavedata.getInt("spawnsAt");
+    // XXX: Assumes that it starts when WaveSequence is constructed (=> "Start Waves" button is clicked).
+    this.spawntime = millis() + Utils.secsToMillis(wavedata.getInt("spawntime"));
 
     this.creepdata = wavedata.getJSONObject("creeps");
     
@@ -73,7 +77,7 @@ class Wave extends Group<Creep> {
   }
   
   private void _spawnNextCreep() {
-    // XXX: Isolate iteration to different object.
+    // XXX: Isolate iteration to different object?
     
     // Done spawning current type of creep.
     if (currTypeRemainingCreeps == 0) {
@@ -86,7 +90,7 @@ class Wave extends Group<Creep> {
       }
     }
     
-    Creep nextCreep = new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), path, (CWorld) game);
+    Creep nextCreep = new Creep(UnitUtils.stringToType(creepTypes[currTypeI]), path, game);
     add(nextCreep);
     
     // Monitor when this creep spawned.
@@ -95,12 +99,8 @@ class Wave extends Group<Creep> {
     currTypeRemainingCreeps--;
   }
   
-  private PVector _randomNearbyOffset(PVector point) {
-    return point;
-  }
-  
   private boolean _spawntimeIsNow() {
-    return Utils.millisToSecs(millis()) == spawnsAt;
+    return spawntime <= millis();
   }
   
   private void _assertNextCreepSpawn() throws NotYetException {

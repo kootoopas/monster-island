@@ -47,7 +47,16 @@ class Player {
     Tower tower = new Tower(type, node, game);
     towers.add(tower);
     node.setTower(tower);
-    
+  }
+  
+  public void receiveDmg() {
+    hp = hp - 1 > 0
+      ? hp - 1
+      : 0;
+  }
+  
+  public boolean isAlive() {
+    return hp > 0;
   }
   
   private void _topText(String text, int x) {
