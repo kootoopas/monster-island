@@ -45,7 +45,7 @@ abstract class Unit extends Being {
     return stats;
   }
 
-  public void inflictDmg(int dmg) {
+  public void receiveDmg(int dmg) {
     dmgReceipt += dmg;
   }
   
@@ -109,8 +109,6 @@ class Creep extends Unit {
   Creep(int type, Path path, Game game) {
     super(type, UnitUtils.CREEP, path.getSpawnpoint(), game);
     this.movement = new CreepMovement(this, path);
-    // XXX: Dirty typecasting over here.
-    // FIXME: convert path linkedlist to arraylist?
   }
   
   public void dmgPlayer() {

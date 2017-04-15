@@ -149,6 +149,10 @@ class Stage {
     return path;
   }
   
+  public Group<Node> getNodes() {
+    return nodes;
+  }
+  
   public int getInitialGold() {
     return initialGold;
   }

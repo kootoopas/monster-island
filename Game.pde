@@ -15,6 +15,7 @@ class Game extends CWorld {
   private WaveSequence waveSeq;
   private Player player;
   private Combat combat;
+//  private ProjectilePool projectilePool;
   
   Game(String stageId) {    
     stage = new Stage(stageId, this);
@@ -25,7 +26,7 @@ class Game extends CWorld {
   
   void setup() {
     stage.setup();
-    
+
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
     combat = new Combat(player.getTowers(), waveSeq.getCreeps(), this);
   }
@@ -39,6 +40,10 @@ class Game extends CWorld {
     } else {
       // game over
       transitionTo(new GameOver());
+    }
+
+    for (Node node : stage.getNodes().getObjects()) {
+      player.buyTower(Tower.ARROW, node);
     }
   }
   

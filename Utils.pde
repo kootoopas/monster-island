@@ -45,5 +45,9 @@ static class Utils {
   public static int secsToMillis(int secs) {
     return secs * 1000;
   }
+  
+  public static HRectangle voidRectangle() {
+    return new HRectangle(0, 0, 0, 0);
+  }
 }
 

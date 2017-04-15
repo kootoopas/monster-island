@@ -10,28 +10,44 @@ class Combat {
     this.creeps = creeps;
     this.game = game;
     
-    this.game.register(towers.projectile, creeps, new ProjectileTowerToCreepCombatInteractor());
+    this.game.register(towers.projectile, creeps, new ProjectileTowerCombatInteractor());
   }
 }
 
 
-class ProjectileTowerToCreepCombat implements TowerToCreepCombat {
+class ProjectileTowerCombat implements TowerToCreepCombat {
   
   private ProjectileTower tower;
+  private int lastShot = (int) HermesMath.MINUS_INFINITY;
   
-  public ProjectileTowerToCreepCombat(ProjectileTower tower) {
+  public ProjectileTowerCombat(ProjectileTower tower) {
     this.tower = tower;
   }
   
-  public void attack(Creep creep) {
-    
+  public void inflictDmg(Creep creep) {
+    println("PEW " + millis());
+    creep.receiveDmg(_calcHitDmg(creep));
+  }
+  
+  public void registerShot() {
+    lastShot = millis();
+  }
+  
+  private int _calcHitDmg(Creep creep) {
+    return ProjectileTower.ATK;
+  }
+  
+  public boolean onCooldown() {
+    return millis() < lastShot + ProjectileTower.HITRATE;
   }
 }
 
 
-class ProjectileTowerToCreepCombatInteractor extends Interactor<ProjectileTower, Creep> {
+class ProjectileTowerCombatInteractor extends Interactor<ProjectileTower, Creep> {
 
   public boolean detect(ProjectileTower tower, Creep creep) {
+    if (tower.onCooldown()) return false;
+
     PVector towerCenter = tower.getBoundingBox().getCenter();
     PVector creepCenter = creep.getBoundingBox().getCenter();
 
@@ -39,11 +55,13 @@ class ProjectileTowerToCreepCombatInteractor extends Interactor<ProjectileTower,
   }
 
   public void handle(ProjectileTower tower, Creep creep) {
-    tower.attack(creep);
+    tower.shoot(creep);
   }
 }
 
 
 interface TowerToCreepCombat {
-  void attack(Creep creep);
+  void inflictDmg(Creep creep);
+  void registerShot();
+  boolean onCooldown();
 }
