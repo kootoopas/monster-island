@@ -29,7 +29,7 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
   }
   
   private int _calcHitDmg(Creep creep) {
-    // TODO: Properly calculate damage based on 
+    // TODO: Properly calculate damage based on creep.stats & tower type and stats
     return ProjectileTower.ATK;
   }
   

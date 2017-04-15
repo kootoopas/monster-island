@@ -33,7 +33,6 @@ class Game extends CWorld {
   void postUpdate() {
     if (player.isAlive()) {
       if (waveSeq.areAllCreepsDead()) {
-        println("Ya won.");
         transitionTo(new RatingCalculation());
       }
     } else {
