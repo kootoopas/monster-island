@@ -25,16 +25,16 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
   }
   
   public void inflictDmg(Creep creep) {
-    println("PEW " + millis());
     creep.receiveDmg(_calcHitDmg(creep));
+  }
+  
+  private int _calcHitDmg(Creep creep) {
+    // TODO: Properly calculate damage based on 
+    return ProjectileTower.ATK;
   }
   
   public void registerShot() {
     lastShot = millis();
-  }
-  
-  private int _calcHitDmg(Creep creep) {
-    return ProjectileTower.ATK;
   }
   
   public boolean onCooldown() {

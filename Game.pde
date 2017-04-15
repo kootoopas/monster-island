@@ -15,7 +15,6 @@ class Game extends CWorld {
   private WaveSequence waveSeq;
   private Player player;
   private Combat combat;
-//  private ProjectilePool projectilePool;
   
   Game(String stageId) {    
     stage = new Stage(stageId, this);
