@@ -6,12 +6,12 @@ class Player {
   
   private int hp = INITIAL_HP;
   private int gold;
-  private Group<Tower> towers;
+  private TowerGroups towers;
   
   Player(int initialGold, Game game) {
     this.gold = initialGold;
     this.game = game;
-    this.towers = new Group(game);
+    this.towers = new TowerGroups(game);
   }
   
   public void drawStats() {
@@ -45,7 +45,7 @@ class Player {
       return;
     }
     
-    Tower tower = new Tower(type, node, game);
+    ProjectileTower tower = new ProjectileTower(type, node, game);
     towers.add(tower);
     node.setTower(tower);
   }
@@ -60,7 +60,7 @@ class Player {
     return hp > 0;
   }
   
-  public Group<Tower> getTowers() {
+  public TowerGroups getTowers() {
     return towers;
   }
   
