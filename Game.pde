@@ -16,7 +16,7 @@ class Game extends CWorld {
   private Player player;
   private Combat combat;
   
-  Game(String stageId) {    
+  Game(String stageId) {
     stage = new Stage(stageId, this);
     stage.setOffset(0, Game.STAGE_OFFSET);
     
@@ -33,10 +33,9 @@ class Game extends CWorld {
   void postUpdate() {
     if (player.isAlive()) {
       if (waveSeq.areAllCreepsDead()) {
-        transitionTo(new RatingCalculation());
+        transitionTo(new RatingCalculation(player.getHp()));
       }
     } else {
-      // game over
       transitionTo(new GameOver());
     }
 

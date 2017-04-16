@@ -63,7 +63,11 @@ class Player {
   public TowerGroups getTowers() {
     return towers;
   }
-  
+
+  public int getHp() {
+    return hp;
+  }
+
   private void _topText(String text, int x) {
     text(text, x, TOP_TEXT_MARGIN);
   }
