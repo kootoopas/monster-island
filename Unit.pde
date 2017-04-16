@@ -3,17 +3,17 @@ abstract class Unit extends Being {
   protected Game game;
   
   protected int type;
-  protected int family;
+  protected int taxonomy;
   protected Stats stats;
   protected Movement movement;
   protected int dmgReceipt = 0;
   
   protected JSONObject data;
 
-  Unit(int type, int family, PVector spawnpoint, Game game) {
+  Unit(int type, int taxonomy, PVector spawnpoint, Game game) {
     super(new HRectangle(spawnpoint.x - 8, spawnpoint.y - 10, 16, 20));
     this.game = game;
-    this.family = family;
+    this.taxonomy = taxonomy;
     this.type = type;
     
     _extractUnitData();
@@ -58,7 +58,7 @@ abstract class Unit extends Being {
   }
   
   protected String getDataPath() {
-    return Utils.pluralize(UnitUtils.familyToString(family)) + "/" + UnitUtils.typeToString(type);
+    return Utils.pluralize(UnitUtils.taxonomyToString(taxonomy)) + "/" + UnitUtils.typeToString(type);
   }
   
   private void _extractUnitData() {
@@ -243,8 +243,8 @@ static class UnitUtils {
     }
   }
   
-  public static String familyToString(int family) {
-    switch(family) {
+  public static String taxonomyToString(int taxonomy) {
+    switch(taxonomy) {
       case UnitUtils.CREEP: return "creep";
       case UnitUtils.GUARD: return "guard";
       default: return "creep";
