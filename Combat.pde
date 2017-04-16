@@ -38,6 +38,7 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
   
   public void shoot(Creep creep) {
     registerShot();
+    // Projectile calls tower.hit(creep) on contact with creep.
     new Projectile(tower, creep, game);
   }
   
@@ -71,7 +72,7 @@ class Projectile extends Being {
   }
 
   public void update() {
-    if (millis() - launchtime > 200) {
+    if (millis() - launchtime > 150) {
       game.delete(this);
       tower.hit(creep);
     }

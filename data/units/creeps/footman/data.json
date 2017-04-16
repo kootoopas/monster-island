@@ -4,5 +4,6 @@
   "hitrate": 170,
   "def": 25,
   "defType": "armored",
-  "spd": 2
+  "spd": 2,
+  "loot": 10
 }

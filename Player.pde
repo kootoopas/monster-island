@@ -68,6 +68,10 @@ class Player {
     return hp;
   }
 
+  public void gainGold(int amount) {
+    gold += amount;
+  }
+
   private void _topText(String text, int x) {
     text(text, x, TOP_TEXT_MARGIN);
   }
@@ -75,4 +79,3 @@ class Player {
 
 
 class InsufficientGoldException extends Exception {}
-

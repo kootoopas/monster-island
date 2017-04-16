@@ -85,6 +85,7 @@ abstract class Unit extends Being {
     if (isAlive()) {
       movement.update();    
     } else {
+      _preDeath();
       this.unregister();
     }
   }
@@ -101,18 +102,27 @@ abstract class Unit extends Being {
   public String toString() {
     return UnitUtils.typeToString(type) + "(hp=" + getRemainingHp() + "/" + stats.hp + ")";
   }
+
+  protected void _preDeath() {}
 }
 
 
 class Creep extends Unit {
 
+  private int loot;
+
   Creep(int type, Path path, Game game) {
     super(type, UnitUtils.CREEP, path.getSpawnpoint(), game);
     this.movement = new CreepMovement(this, path);
+    this.loot = data.getInt("loot");
   }
   
   public void dmgPlayer() {
     game.dmgPlayer();
+  }
+
+  protected void _preDeath() {
+    game.rewardPlayer(loot);
   }
 }
 
@@ -177,7 +187,7 @@ class CreepMovement extends UnitMovement {
     this.creep = creep;
     this.pathIter = path.iterator();
     
-    // Skip spawnpoint
+    // Skip spawnpoint.
     this.pathIter.next();
     
     this.setDest((PVector) pathIter.next());

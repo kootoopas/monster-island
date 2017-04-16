@@ -66,5 +66,9 @@ class Game extends CWorld {
   void dmgPlayer() {
     player.receiveDmg();
   }
+
+  void rewardPlayer(int amount) {
+    player.gainGold(amount);
+  }
 }
 
