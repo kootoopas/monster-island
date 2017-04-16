@@ -16,15 +16,18 @@ class Combat {
 
 
 class ProjectileTowerCombat implements TowerToCreepCombat {
-  
+
+  private Game game;
+
   private ProjectileTower tower;
   private int lastShot = (int) HermesMath.MINUS_INFINITY;
   
-  public ProjectileTowerCombat(ProjectileTower tower) {
+  public ProjectileTowerCombat(ProjectileTower tower, Game game) {
+    this.game = game;
     this.tower = tower;
   }
   
-  public void inflictDmg(Creep creep) {
+  public void hit(Creep creep) {
     creep.receiveDmg(_calcHitDmg(creep));
   }
   
@@ -33,12 +36,52 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
     return ProjectileTower.ATK;
   }
   
+  public void shoot(Creep creep) {
+    registerShot();
+    new Projectile(tower, creep, game);
+  }
+  
   public void registerShot() {
     lastShot = millis();
   }
   
   public boolean onCooldown() {
     return millis() < lastShot + ProjectileTower.HITRATE;
+  }
+}
+
+
+class Projectile extends Being {
+
+  private Game game;
+
+  private ProjectileTower tower;
+  private Creep creep;
+
+  private int launchtime;
+
+  public Projectile(ProjectileTower tower, Creep creep, Game game) {
+    super(Utils.voidRectangle());
+    this.game = game;
+    this.tower = tower;
+    this.creep = creep;
+
+    this.launchtime = millis();
+    this.game.register(this);
+  }
+
+  public void update() {
+    if (millis() - launchtime > 200) {
+      game.delete(this);
+      tower.hit(creep);
+    }
+  }
+
+  public void draw() {
+    PVector towerPos = tower.getBoundingBox().getCenter();
+    PVector creepPos = creep.getBoundingBox().getCenter();
+
+    line(towerPos.x, towerPos.y, creepPos.x, creepPos.y);
   }
 }
 
@@ -61,7 +104,8 @@ class ProjectileTowerCombatInteractor extends Interactor<ProjectileTower, Creep>
 
 
 interface TowerToCreepCombat {
-  void inflictDmg(Creep creep);
+  void shoot(Creep creep);
   void registerShot();
+  void hit(Creep creep);
   boolean onCooldown();
 }

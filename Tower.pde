@@ -38,12 +38,14 @@ abstract class Tower extends Being {
   }
 }
 
+
 abstract class GuardTower extends Tower {
 
   public GuardTower(int type, Node node, Game game) {
     super(type, node, game);
   }
 }
+
 
 abstract class OffensiveTower extends Tower {
 
@@ -53,14 +55,15 @@ abstract class OffensiveTower extends Tower {
     super(type, node, game);
   }
   
-  public void inflictDmg(Creep creep) {
-    combat.inflictDmg(creep);
+  public void hit(Creep creep) {
+    combat.hit(creep);
   }
   
   public boolean onCooldown() {
     return combat.onCooldown();
   }
 }
+
 
 class ProjectileTower extends OffensiveTower {
   
@@ -69,50 +72,13 @@ class ProjectileTower extends OffensiveTower {
   
   public ProjectileTower(int type, Node node, Game game) {
     super(type, node, game);
-    this.combat = new ProjectileTowerCombat(this);
+    this.combat = new ProjectileTowerCombat(this, game);
   }
   
   public void shoot(Creep creep) {
-    combat.registerShot();
-    new Projectile(this, creep, game);
+    combat.shoot(creep);
   }
 }
-
-
-class Projectile extends Being {
-  
-  private Game game;
-  
-  private ProjectileTower tower;
-  private Creep creep;
-  
-  private int launchtime;
-  
-  public Projectile(ProjectileTower tower, Creep creep, Game game) {
-    super(Utils.voidRectangle());
-    this.game = game;
-    this.tower = tower;
-    this.creep = creep;
-    
-    this.launchtime = millis();
-    this.game.register(this);
-  }
-  
-  public void update() {
-    if (millis() - launchtime > 200) {
-      game.delete(this);
-      tower.inflictDmg(creep);
-    }
-  }
-  
-  public void draw() {
-    PVector towerPos = tower.getBoundingBox().getCenter();
-    PVector creepPos = creep.getBoundingBox().getCenter();
-
-    line(towerPos.x, towerPos.y, creepPos.x, creepPos.y);
-  }
-}
-
 
 
 class TowerGroups {
