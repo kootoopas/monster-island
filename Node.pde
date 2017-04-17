@@ -40,9 +40,15 @@ class Node extends Being {
   }
   
   void draw() {
-    stroke(hovered || active ? #00aa00 : #00dd00);
+    stroke(hovered || active
+            ? #00aa00
+            : #00dd00
+    );
     
-    fill(active ? #00bb00 : #00ff00);
+    fill(active
+            ? #00bb00
+            : #00ff00
+    );
     _shape.draw();
   }
   
@@ -148,8 +154,8 @@ class BuyButton extends ShapeButton {
   
   public void receive(MouseMessage msg) {
     if (msg.getAction() == POCodes.Click.PRESSED
-        && node.isActive()
-        && _shape.contains(mouseX, mouseY)) {
+            && node.isActive()
+            && _shape.contains(mouseX, mouseY)) {
       game.buyTower(type, node);
     }
   }

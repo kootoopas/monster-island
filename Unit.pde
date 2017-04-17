@@ -122,6 +122,7 @@ class Creep extends Unit {
   }
 
   protected void _preDeath() {
+    new PopupText("+" + loot, getPosition(), game);
     game.rewardPlayer(loot);
   }
 }

@@ -50,4 +50,3 @@ static class Utils {
     return new HRectangle(0, 0, 0, 0);
   }
 }
-
