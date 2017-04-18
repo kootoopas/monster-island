@@ -15,14 +15,12 @@ class Node extends Being {
     this.game = game;
     this.po = game.getPostOffice();
     
-//    this.tower = null;
-    
     this.ctrls = new NodeCtrls(this, game);
     
     this.game.register(this);
     this.game.subscribe(this, POCodes.Button.LEFT);
   }
-  
+
   void receive(MouseMessage m) {
     if (m.getAction() == POCodes.Click.PRESSED) {
       if (hovered
@@ -102,7 +100,7 @@ class NodeCtrls extends Being {
     
     this.btns = new ArrayList();
     this.btns.add(
-      new BuyButton(
+      new NodeBuyButton(
         Utils.fitIn(this.getBoundingBox(), 3),
         Tower.ARROW,
         node,
@@ -133,30 +131,6 @@ class NodeCtrls extends Being {
 
     for (Button btn : btns) {
       game.delete(btn);
-    }
-  }
-}
-
-
-class BuyButton extends ShapeButton {
-  private int type;
-  private Node node;
-  private Game game;
-  
-  BuyButton(HShape shape, int type, Node node, Game game) {
-    super(shape, Utils.getTowerColor(type), Button.HIDDEN, (CWorld) game);
-    this.type = type;
-    this.node = node;
-    this.game = game;
-    
-    this.game.subscribe(this, POCodes.Button.LEFT);
-  }
-  
-  public void receive(MouseMessage msg) {
-    if (msg.getAction() == POCodes.Click.PRESSED
-            && node.isActive()
-            && _shape.contains(mouseX, mouseY)) {
-      game.buyTower(type, node);
     }
   }
 }
