@@ -13,10 +13,16 @@ static final int WINDOW_HEIGHT = 512;
 CWorldManager worldManager;
 
 void setup() {
-  size(WINDOW_WIDTH, WINDOW_HEIGHT);  // set window size
+  // set window size
+  size(WINDOW_WIDTH, WINDOW_HEIGHT);
   noSmooth();
-  Hermes.setPApplet(this);            // give the library the PApplet
-  
+
+  // give the library the PApplet
+  Hermes.setPApplet(this);
+
+  // Set default font.
+  textFont(createFont("fonts/m5x7.ttf", 32));
+
   // set up the world
   worldManager = new CWorldManager();
   worldManager.setInitialWorld(new Game("test"));

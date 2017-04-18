@@ -1,6 +1,6 @@
 class Player {
-  private static final int INITIAL_HP = 2000;
-  public static final int TOP_TEXT_MARGIN = 21;
+  private static final int INITIAL_HP = 20;
+  public static final int TOP_TEXT_MARGIN = 23;
   
   private Game game;
   
@@ -15,14 +15,11 @@ class Player {
   }
   
   public void drawStats() {
-    PFont font = createFont("", 16);
-    
+
     fill(Utils.FADED_RED);
-    textFont(font);
     _topText(hp + "HP", 10);
     
     fill(Utils.BANANA);
-    textFont(font);
     _topText(gold + "G", 60);
   }
   
@@ -52,8 +49,8 @@ class Player {
   
   public void receiveDmg() {
     hp = hp - 1 > 0
-      ? hp - 1
-      : 0;
+            ? hp - 1
+            : 0;
   }
   
   public boolean isAlive() {
@@ -73,6 +70,7 @@ class Player {
   }
 
   private void _topText(String text, int x) {
+    textSize(32);
     text(text, x, TOP_TEXT_MARGIN);
   }
 }

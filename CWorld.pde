@@ -7,6 +7,7 @@ import hermes.postoffice.*;
 abstract class CWorld extends World implements EventHandler {
   
   private CWorldManager manager;
+  public CWorldDefaults defaults = new CWorldDefaults();
   
   /**
    * Should be only used internally by CWorldManager.
@@ -20,6 +21,10 @@ abstract class CWorld extends World implements EventHandler {
   }
   
   void handleEvent(Being being) {}
+
+  public CWorldDefaults getDefaults() {
+    return defaults;
+  }
 }
 
 

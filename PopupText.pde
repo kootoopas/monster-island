@@ -6,12 +6,14 @@ class PopupText extends Being {
   public static final int LIFETIME = 600;
   public static final int MAX_ALPHA = 255;
 
+  protected color SHADOW_COLOR = Utils.VERY_DARK_VIOLET;
+
   private CWorld world;
 
   private String text;
   private int spawntime;
   private float alpha = 255;
-  protected color textColor = Utils.FADED_RED;
+  protected color textColor = Utils.BANANA;
 
   public PopupText(String text, PVector pos, CWorld world) {
     super(
@@ -48,9 +50,19 @@ class PopupText extends Being {
     noFill();
     noStroke();
     _shape.draw();
+    _drawShadow();
+    _drawText();
+  }
 
+  private void _drawShadow() {
+    fill(SHADOW_COLOR, alpha);
+    textSize(32);
+    text(text, WIDTH * 0.4, 1);
+  }
+
+  private void _drawText() {
     fill(textColor, alpha);
-    textSize(22);
+    textSize(32);
     text(text, WIDTH * 0.4, 0);
   }
 }

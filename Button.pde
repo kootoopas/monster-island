@@ -8,7 +8,7 @@ class Button extends Being {
   public static final int HIDDEN = 0;
   public static final int VISIBLE = 1;
   
-  private CWorld world;
+  protected CWorld world;
 
   public Button(HShape shape, CWorld world) {
     this(shape, VISIBLE, world);
@@ -58,10 +58,10 @@ class ShapeButton extends Button {
 
 class TextButton extends Button {
   public static final int WIDTH = 300;
-  public static final int HEIGHT = 50;
+  public static final int HEIGHT = 32;
   private static final color BACKGROUND = Utils.VERY_DARK_VIOLET;
-  private static final color COLOR = #ffffff;
-  private static final color ACTIVE_COLOR = #fff700;
+  private static final color COLOR = Utils.PEPPERMINT;
+  private static final color ACTIVE_COLOR = Utils.BANANA;
 
   private String text;
 
@@ -75,15 +75,31 @@ class TextButton extends Button {
   }
 
   public void draw() {
+    _drawBackground();
+
+    _setHoverFill();
+    _drawLeftBorder();
+    _drawText();
+  }
+
+  private void _drawBackground() {
     fill(BACKGROUND);
     noStroke();
     _shape.draw();
+  }
 
-    textSize(16);
+  private void _setHoverFill() {
     fill(_shape.contains(mouseX, mouseY)
             ? ACTIVE_COLOR
             : COLOR);
-    text(text, 50, 20); //text is drawn in relation to the shapes origin.
+  }
 
+  private void _drawLeftBorder() {
+    rect(0, 0, 5, HEIGHT);
+  }
+
+  private void _drawText() {
+    // Text is drawn in relation to _shape's origin.
+    text(text, 22, 22);
   }
 }
