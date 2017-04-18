@@ -98,7 +98,7 @@ class Stage {
   }
   
   private void _buildTileLayerImg(TileLayer layer) {
-    PGraphics img = createGraphics(getWidth(), getHeight(), JAVA2D);
+    PGraphics img = createGraphics(getWidth(), getHeight());
     img.beginDraw();
     
     for (int y = 0; y < tilesPerCol; y++) {
@@ -111,7 +111,7 @@ class Stage {
         
         PImage tileImg = new PImage(rawImg);
 // TODO: Enable if pixelart resize is added      
-//        img.resize(Utils.scale(tileWidth), Utils.scale(tileHeight));
+//        tileImg.resize(Utils.scale(tileWidth), Utils.scale(tileHeight));
         
         img.image(tileImg, x * Utils.scale(tileWidth), y * Utils.scale(tileWidth));
       }

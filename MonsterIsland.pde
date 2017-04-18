@@ -13,7 +13,8 @@ static final int WINDOW_HEIGHT = 512;
 CWorldManager worldManager;
 
 void setup() {
-  size(WINDOW_WIDTH, WINDOW_HEIGHT, JAVA2D);  // set window size
+  size(WINDOW_WIDTH, WINDOW_HEIGHT);  // set window size
+  noSmooth();
   Hermes.setPApplet(this);            // give the library the PApplet
   
   // set up the world
@@ -27,6 +28,5 @@ void setup() {
 }
 
 void draw() {
-  noSmooth();
   worldManager.draw();
 }

@@ -20,14 +20,19 @@ class Button extends Being {
     
     if (visibility == VISIBLE) {
       this.world.register(this);
+      this.world.subscribe(this, POCodes.Button.LEFT);
     }
   }
 
-//  public void receive(MouseMessage msg) {
-//    if (msg.getAction() == POCodes.Click.PRESSED) {
-//      world.handleEvent((Being) this);
-//    }
-//  }
+  public void receive(MouseMessage msg) {
+    if (msg.getAction() == POCodes.Click.PRESSED
+            && _shape.contains(mouseX, mouseY)) {
+      _onClick();
+    }
+  }
+
+  // Override in subclasses to use.
+  protected void _onClick() {}
 }
 
 class ShapeButton extends Button {
