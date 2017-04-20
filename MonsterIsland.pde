@@ -16,20 +16,18 @@ void setup() {
   // set window size
   size(WINDOW_WIDTH, WINDOW_HEIGHT);
   noSmooth();
-
-  // give the library the PApplet
-  Hermes.setPApplet(this);
-
-  // Set default font.
-  textFont(createFont("fonts/m5x7.ttf", 32));
-
-  // set up the world
-  worldManager = new CWorldManager();
-  worldManager.setInitialWorld(new Game("test"));
-  
   rectMode(CORNER);
   frameRate(50);
-  
+
+  // Give the library the PApplet.
+  Hermes.setPApplet(this);
+
+  // Set the default font. (font by: https://managore.itch.io/m5x7)
+  textFont(createFont("fonts/m5x7.ttf", 32));
+
+  worldManager = new CWorldManager();
+  worldManager.setInitialWorld(new Game("test"));
+//
   worldManager.start();
 }
 

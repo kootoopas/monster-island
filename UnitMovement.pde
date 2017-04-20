@@ -1,9 +1,15 @@
 class UnitMovement implements Movement {
 
+  public static final int UP = 0;
+  public static final int RIGHT = 1;
+  public static final int DOWN = 2;
+  public static final int LEFT = 3;
+
   private Unit unit;
   protected int status = Movement.STILL;
   protected float spd;
   protected PVector dest;
+  protected int direction = DOWN;
   private boolean destReached = false;
 
   public UnitMovement(Unit unit) {
@@ -38,7 +44,31 @@ class UnitMovement implements Movement {
     if (!dest.equals(nextDest)) {
       destReached = false;
       dest = nextDest;
+      _setDirection();
     }
+  }
+
+  private void _setDirection() {
+    float angle = degrees(
+            PVector.angleBetween(unit.getPosition(), dest)
+    );
+    // TODO: Figure out how degrees and angleBetween works. (currently it gives values between ~0 and ~15)
+//    print(angle);
+
+    if (angle <= 45 || angle >= 315) {
+      direction = RIGHT;
+    } else if (angle > 45 && angle < 135) {
+      direction = UP;
+    } else if (angle >= 135 && angle <= 225) {
+      direction = LEFT;
+    } else {
+      // Between 225 & 315 is implied.
+      direction = DOWN;
+    }
+  }
+
+  public int getDirection() {
+    return direction;
   }
 
   public boolean destReached() {

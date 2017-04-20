@@ -1,7 +1,7 @@
-abstract class Unit extends Being {
+class Unit extends CBeing {
 
   protected Game game;
-  
+
   protected int type;
   protected int taxonomy;
   protected UnitStats stats;
@@ -15,10 +15,12 @@ abstract class Unit extends Being {
     this.game = game;
     this.taxonomy = taxonomy;
     this.type = type;
-    
+
     _extractUnitData();
     this.stats = new UnitStats(data);
-    
+
+    this.movement = new UnitMovement(this);
+
     this.game.register(this);
   }
 
@@ -89,6 +91,8 @@ abstract class Unit extends Being {
 
 
 class Creep extends Unit {
+
+  public static final int PEASANT_SPRITE = 10;
 
   private int loot;
 

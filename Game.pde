@@ -1,9 +1,3 @@
-import hermes.*;
-import hermes.hshape.*;
-import hermes.animation.*;
-import hermes.physics.*;
-import hermes.postoffice.*;
-
 class Game extends CWorld {
   public static final int STAGE_OFFSET = 32;
 
@@ -18,21 +12,25 @@ class Game extends CWorld {
 
   private Stage stage;
   private Combat combat;
-  
+  Unit unit;
+
   Game(String stageId) {
     stage = new Stage(stageId, this);
     stage.setOffset(0, Game.STAGE_OFFSET);
-    
+
     player = new Player(stage.getInitialGold(), this);
   }
-  
+
   void setup() {
     stage.setup();
+    waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
     new SpawnWaveBtn(stage.getPath().getSpawnpoint(), this);
+
+    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
   }
-  
+
   void postUpdate() {
-    if (waveSeq == null) return;
+    if (waveSeq.hasNotStarted()) return;
 
     if (player.isAlive()) {
       if (waveSeq.areAllCreepsDead()) {
@@ -45,30 +43,30 @@ class Game extends CWorld {
     }
 
     // XXX: Auto populate all nodes with arrow towers for testing.
-    for (Node node : stage.getNodes().getObjects()) {
-      player.buyTower(Tower.ARROW, node);
-    }
+//    for (Node node : stage.getNodes().getObjects()) {
+//      player.buyTower(Tower.ARROW, node);
+//    }
   }
-  
+
   void draw() {
     background(Utils.VERY_DARK_VIOLET);
 
     // Manually draw non-Beings.
     player.drawStats();
     stage.drawMap();
-    
+
     // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objects
     super.draw();
   }
-  
+
   void handleEvent(Being being) {
     println(being.getPosition());
   }
-  
+
   void buyTower(int type, Node node) {
     player.buyTower(type, node);
   }
-  
+
   void dmgPlayer() {
     player.receiveDmg();
   }
@@ -78,7 +76,7 @@ class Game extends CWorld {
   }
 
   void startWaveSeq() {
-    waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
+    waveSeq.start();
     combat = new Combat(player.getTowers(), waveSeq.getCreeps(), this);
   }
 }
