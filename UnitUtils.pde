@@ -1,4 +1,7 @@
 static class UnitUtils {
+  public static final int WIDTH = 18;
+  public static final int HEIGHT = 20;
+
   public static final int GUARD = 0;
   public static final int CREEP = 1;
 

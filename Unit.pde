@@ -6,12 +6,19 @@ class Unit extends CBeing {
   protected int taxonomy;
   protected UnitStats stats;
   protected Movement movement;
+  protected UnitAnimations anims;
   protected int dmgReceipt = 0;
 
   protected JSONObject data;
 
   Unit(int type, int taxonomy, PVector spawnpoint, Game game) {
-    super(new HRectangle(spawnpoint.x - 8, spawnpoint.y - 10, 16, 20));
+    super(new HRectangle(
+            spawnpoint.x - UnitUtils.WIDTH * 0.5,
+            spawnpoint.y - UnitUtils.HEIGHT * 0.5,
+            UnitUtils.WIDTH,
+            UnitUtils.HEIGHT
+    ));
+
     this.game = game;
     this.taxonomy = taxonomy;
     this.type = type;
@@ -20,6 +27,7 @@ class Unit extends CBeing {
     this.stats = new UnitStats(data);
 
     this.movement = new UnitMovement(this);
+    this.anims = new UnitAnimations(this);
 
     this.game.register(this);
   }
@@ -74,8 +82,7 @@ class Unit extends CBeing {
   }
   
   public void draw() {
-    fill(Utils.FADED_RED);
-    _shape.draw();
+    image(anims.animate(), 0, 0); // draw the current animation frame
   }
   
   public void unregister() {
@@ -91,8 +98,6 @@ class Unit extends CBeing {
 
 
 class Creep extends Unit {
-
-  public static final int PEASANT_SPRITE = 10;
 
   private int loot;
 

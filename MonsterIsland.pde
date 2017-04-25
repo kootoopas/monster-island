@@ -11,6 +11,7 @@ static final int WINDOW_WIDTH = 544;
 static final int WINDOW_HEIGHT = 512;
 
 CWorldManager worldManager;
+AssetManager assetManager;
 
 void setup() {
   // set window size
@@ -25,12 +26,28 @@ void setup() {
   // Set the default font. (font by: https://managore.itch.io/m5x7)
   textFont(createFont("fonts/m5x7.ttf", 32));
 
-  worldManager = new CWorldManager();
-  worldManager.setInitialWorld(new Game("test"));
-//
-  worldManager.start();
+  _preloadAssets();
+  _startGame();
 }
 
 void draw() {
   worldManager.draw();
+}
+
+void _preloadAssets() {
+  assetManager = new AssetManager();
+
+  assetManager.put(
+        "unitSheet",
+        new Tileset(
+          loadImage(dataPath(UnitUtils.DIR + "/spritesheet.png")),
+          UnitUtils.WIDTH,
+          UnitUtils.HEIGHT
+        ));
+}
+
+void _startGame() {
+  worldManager = new CWorldManager();
+  worldManager.setInitialWorld(new Game("test"));
+  worldManager.start();
 }
