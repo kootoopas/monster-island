@@ -6,7 +6,7 @@ class Unit extends CBeing {
   protected int taxonomy;
   protected UnitStats stats;
   protected Movement movement;
-  protected UnitAnimations anims;
+  protected UnitAnimator anim;
   protected int dmgReceipt = 0;
 
   protected JSONObject data;
@@ -27,9 +27,13 @@ class Unit extends CBeing {
     this.stats = new UnitStats(data);
 
     this.movement = new UnitMovement(this);
-    this.anims = new UnitAnimations(this);
+    this.anim = new UnitAnimator(this);
 
     this.game.register(this);
+  }
+
+  public int getType() {
+    return type;
   }
 
   public UnitStats getStats() {
@@ -51,7 +55,11 @@ class Unit extends CBeing {
   protected String getDataPath() {
     return Utils.pluralize(UnitUtils.taxonomyToString(taxonomy)) + "/" + UnitUtils.typeToString(type);
   }
-  
+
+  public UnitAnimator getAnimator() {
+    return anim;
+  }
+
   private void _extractUnitData() {
     try {
       data = parseJSONObject(
@@ -82,7 +90,7 @@ class Unit extends CBeing {
   }
   
   public void draw() {
-    image(anims.animate(), 0, 0); // draw the current animation frame
+    image(anim.animate(), 0, 0); // draw the current animation frame
   }
   
   public void unregister() {
