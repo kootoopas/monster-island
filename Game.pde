@@ -7,7 +7,7 @@ class Game extends CWorld {
 
   private Player player;
 
-  private SpawnWaveBtn spawnWaveBtn;
+  private SpawnWaveButton SpawnWaveButton;
   private WaveSequence waveSeq;
 
   private Stage stage;
@@ -24,7 +24,7 @@ class Game extends CWorld {
   void setup() {
     stage.setup();
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
-    new SpawnWaveBtn(stage.getPath().getSpawnpoint(), this);
+    new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
 
 //    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
 //    unit.getAnimator().setActiveAnimation(UnitAnimator.DOWNWARDS_WALK_IDX);
@@ -80,20 +80,20 @@ class Game extends CWorld {
     waveSeq.start();
     combat = new Combat(player.getTowers(), waveSeq.getCreeps(), this);
   }
-}
 
 
-class SpawnWaveBtn extends TextButton {
+  private class SpawnWaveButton extends TextButton {
 
-  private Game game;
+    private Game game;
 
-  public SpawnWaveBtn(PVector spawnpoint, Game game) {
-    super((int) spawnpoint.x, (int) spawnpoint.y + 60, "Spawn wave", game);
-    this.game = game;
-  }
+    public SpawnWaveButton(PVector spawnpoint, Game game) {
+      super((int) spawnpoint.x, (int) spawnpoint.y + 60, "Spawn wave", game);
+      this.game = game;
+    }
 
-  protected void _onClick() {
-    game.startWaveSeq();
-    game.delete(this);
+    protected void _onClick() {
+      game.startWaveSeq();
+      game.delete(this);
+    }
   }
 }

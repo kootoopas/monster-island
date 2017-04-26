@@ -18,6 +18,14 @@ class UnitMovement implements Movement {
     this.dest = unit.getPosition();
   }
 
+  public UnitMovement(Creep creep) {
+    this((Unit) creep);
+  }
+
+  public UnitMovement(Guard guard) {
+    this((Unit) guard);
+  }
+
   public void update() {
     if (destReached()) return;
 
@@ -93,52 +101,4 @@ class UnitMovement implements Movement {
   public boolean destReached() {
     return destReached;
   }
-}
-
-
-class CreepMovement extends UnitMovement {
-
-  // Dest is initially set to 2nd point of path. (since every creep moves from there first)
-  private Iterator pathIter;
-  private Creep creep;
-
-  public CreepMovement(Creep creep, Path path) {
-    super((Unit) creep);
-    this.creep = creep;
-    this.pathIter = path.iterator();
-
-    // Skip spawnpoint.
-    this.pathIter.next();
-
-    this.setDest((PVector) pathIter.next());
-  }
-
-  public void update() {
-    if (destReached()) {
-      if (pathIter.hasNext()) {
-        setDest((PVector) pathIter.next());
-      } else {
-        _handleGuardpointReach();
-      }
-    }
-
-    super.update();
-  }
-
-  private void _handleGuardpointReach() {
-    creep.dmgPlayer();
-    creep.unregister();
-  }
-}
-
-
-interface Movement {
-  static final int STILL = 0;
-  static final int MOVING = 1;
-  static final int INTERRUPTED = 2;
-
-  void setDest(PVector nextDest);
-  boolean destReached();
-  int getDirection();
-  void update();
 }

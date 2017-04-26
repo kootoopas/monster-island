@@ -47,22 +47,6 @@ abstract class GuardTower extends Tower {
 }
 
 
-abstract class OffensiveTower extends Tower {
-
-  protected TowerToCreepCombat combat;
-
-  public OffensiveTower(int type, Node node, Game game) {
-    super(type, node, game);
-  }
-  
-  public void hit(Creep creep) {
-    combat.hit(creep);
-  }
-  
-  public boolean onCooldown() {
-    return combat.onCooldown();
-  }
-}
 
 
 class ProjectileTower extends OffensiveTower {
@@ -77,51 +61,5 @@ class ProjectileTower extends OffensiveTower {
   
   public void shoot(Creep creep) {
     combat.shoot(creep);
-  }
-}
-
-
-class TowerGroups {
-
-  private Game game;
-  
-  public Group<Tower> all;
-  public Group<ProjectileTower> projectile;
-  public Group<GuardTower> guard;
-  
-  public TowerGroups(Game game) {
-    this.game = game;
-    
-    this.all = new Group(game);
-    this.projectile = new Group(game);
-    this.guard = new Group(game);
-  }
-  
-  public void add(ProjectileTower tower) {
-    _addToAll(tower);
-    projectile.add(tower);
-  }
-  
-  public void add(GuardTower tower) {
-    _addToAll(tower);
-    guard.add(tower);
-  }
-  
-  private void _addToAll(Tower tower) {
-    all.add(tower);
-  }
-}
-
-
-static class TowerCost {
-  public static final int ARROW_BASE = 100;
-
-  static int calc(int type) {
-    return calc(type, 1);
-  }
-  
-  static int calc(int type, int lvl) {
-    // TODO: Move tower data on diff object. maybe parse json object containing their data? meta lvls power etc
-    return ARROW_BASE;
   }
 }
