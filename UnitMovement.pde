@@ -56,19 +56,19 @@ class UnitMovement implements Movement {
     float angle = degrees(atan2(dy, dx));
 
     if (angle <= 45 && angle >= -45) {
-      println("right");
+//      println("right");
       nextDirection = RIGHT;
       nextAnimation = UnitAnimator.HORIZONTAL_WALK_IDX;
     } else if (angle < -45 && angle > -135) {
-      println("up");
+//      println("up");
       nextDirection = UP;
       nextAnimation = UnitAnimator.UPWARDS_WALK_IDX;
     } else if (angle < -135 || angle > 135) {
-      println("left");
+//      println("left");
       nextDirection = LEFT;
       nextAnimation = UnitAnimator.HORIZONTAL_WALK_IDX;
     } else {
-      println("down");
+//      println("down");
       // Between 135 & 45 is implied.
       nextDirection = DOWN;
       nextAnimation = UnitAnimator.DOWNWARDS_WALK_IDX;
