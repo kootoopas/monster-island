@@ -36,6 +36,10 @@ class Unit extends CBeing {
     return type;
   }
 
+  public int getDirection() {
+    return movement.getDirection();
+  }
+
   public UnitStats getStats() {
     return stats;
   }

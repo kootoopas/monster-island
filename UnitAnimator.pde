@@ -10,7 +10,7 @@ class UnitAnimator {
   /**
    * Number of sprites that each animation is composed of.
    */
-  public static final int FRAMES_LENGTH = 4;
+  public static final int WALK_FRAMES_LENGTH = 3;
   public static final int MILLIS_PER_FRAME = 150;
 
   private Unit unit;
@@ -23,10 +23,16 @@ class UnitAnimator {
     this.unit = unit;
     this.sprite = new AnimatedSprite();
     _setAnimations();
-    setActiveAnimation(DOWNWARDS_WALK_IDX);
+    setActiveAnimation(HORIZONTAL_WALK_IDX);
   }
 
   public PImage animate() {
+    if (unit.getDirection() == UnitMovement.LEFT) {
+      // Flip sprite.
+      scale(-1,1);
+      translate(-UnitUtils.WIDTH, 0);
+    }
+
     return sprite.animate();
   }
 
@@ -35,7 +41,7 @@ class UnitAnimator {
   }
 
   /**
-   * NOTE: Order of registration should always reflect IDXs.
+   * NOTE: Order of registration matters. It should always reflect IDXs.
    */
   private void _setAnimations() {
     sprite.addAnimation(new Animation(_extractUpwardsWalkcycle(), MILLIS_PER_FRAME));
@@ -45,26 +51,28 @@ class UnitAnimator {
 
   private PImage[] _extractUpwardsWalkcycle() {
     PImage[] sprites = unitSheet.getRowOfTiles(_getSpriteIdx() + UPWARDS_WALK_IDX);
-    return Arrays.copyOfRange(sprites, 0, FRAMES_LENGTH - 1);
+    return Arrays.copyOfRange(sprites, 0, WALK_FRAMES_LENGTH);
   }
 
   private PImage[] _extractHorizontalWalkcycle() {
     PImage[] sprites = unitSheet.getRowOfTiles(_getSpriteIdx() + HORIZONTAL_WALK_IDX);
-    return Arrays.copyOfRange(sprites, 0, FRAMES_LENGTH - 1);
+    return Arrays.copyOfRange(sprites, 0, WALK_FRAMES_LENGTH);
   }
 
   private PImage[] _extractDownwardsWalkcycle() {
     PImage[] sprites = unitSheet.getRowOfTiles(_getSpriteIdx() + DOWNWARDS_WALK_IDX);
-    return Arrays.copyOfRange(sprites, 0, FRAMES_LENGTH - 1);
+    return Arrays.copyOfRange(sprites, 0, WALK_FRAMES_LENGTH);
   }
 
   /**
    * All animations' indexes map to unit sprites in data/units/spritesheet.
    */
   private HashMap<Integer, Integer> _createTypeToSpriteMap() {
+//    int LINES_OF_SPRITES_PER_UNIT = 3;
+
     HashMap<Integer, Integer> map = new HashMap();
-    map.put(UnitUtils.PEASANT, 10);
-    map.put(UnitUtils.FOOTMAN, 3);
+    map.put(UnitUtils.PEASANT, 10 * 3);
+    map.put(UnitUtils.FOOTMAN, 3 * 3);
     return map;
   }
 

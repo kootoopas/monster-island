@@ -49,26 +49,45 @@ class UnitMovement implements Movement {
   }
 
   private void _setDirection() {
-    float angle = degrees(
-            PVector.angleBetween(unit.getPosition(), dest)
-    );
-    // TODO: Figure out how degrees and angleBetween works. (currently it gives values between ~0 and ~15)
-//    print(angle);
+    int nextDirection;
+    int nextAnimation;
+    float dy = dest.y - unit.getY();
+    float dx = dest.x - unit.getX();
+    float angle = degrees(atan2(dy, dx));
 
-    if (angle <= 45 || angle >= 315) {
-      direction = RIGHT;
-    } else if (angle > 45 && angle < 135) {
-      direction = UP;
-    } else if (angle >= 135 && angle <= 225) {
-      direction = LEFT;
+    if (angle <= 45 && angle >= -45) {
+      println("right");
+      nextDirection = RIGHT;
+      nextAnimation = UnitAnimator.HORIZONTAL_WALK_IDX;
+    } else if (angle < -45 && angle > -135) {
+      println("up");
+      nextDirection = UP;
+      nextAnimation = UnitAnimator.UPWARDS_WALK_IDX;
+    } else if (angle < -135 || angle > 135) {
+      println("left");
+      nextDirection = LEFT;
+      nextAnimation = UnitAnimator.HORIZONTAL_WALK_IDX;
     } else {
-      // Between 225 & 315 is implied.
-      direction = DOWN;
+      println("down");
+      // Between 135 & 45 is implied.
+      nextDirection = DOWN;
+      nextAnimation = UnitAnimator.DOWNWARDS_WALK_IDX;
+    }
+
+
+    if (directionChanged(nextDirection)) {
+      unit.getAnimator()
+              .setActiveAnimation(nextAnimation);
+      direction = nextDirection;
     }
   }
 
   public int getDirection() {
     return direction;
+  }
+
+  public boolean directionChanged(int newDirection) {
+    return direction != newDirection;
   }
 
   public boolean destReached() {
@@ -120,5 +139,6 @@ interface Movement {
 
   void setDest(PVector nextDest);
   boolean destReached();
+  int getDirection();
   void update();
 }

@@ -26,7 +26,8 @@ class Game extends CWorld {
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
     new SpawnWaveBtn(stage.getPath().getSpawnpoint(), this);
 
-    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
+//    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
+//    unit.getAnimator().setActiveAnimation(UnitAnimator.DOWNWARDS_WALK_IDX);
   }
 
   void postUpdate() {
@@ -43,9 +44,9 @@ class Game extends CWorld {
     }
 
     // XXX: Auto populate all nodes with arrow towers for testing.
-//    for (Node node : stage.getNodes().getObjects()) {
-//      player.buyTower(Tower.ARROW, node);
-//    }
+    for (Node node : stage.getNodes().getObjects()) {
+      player.buyTower(Tower.ARROW, node);
+    }
   }
 
   void draw() {
