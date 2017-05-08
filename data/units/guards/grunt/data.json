@@ -1,0 +1,8 @@
+{
+  "hp": 200,
+  "atk": 28,
+  "hitrate": 170,
+  "def": 30,
+  "defType": "armored",
+  "spd": 2
+}

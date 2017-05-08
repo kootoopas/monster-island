@@ -12,13 +12,13 @@ class CreepMovement extends UnitMovement {
     // Skip spawnpoint.
     this.pathIter.next();
 
-    this.setDest((PVector) pathIter.next());
+    this.moveTo((PVector) pathIter.next());
   }
 
   public void update() {
     if (destReached()) {
       if (pathIter.hasNext()) {
-        setDest((PVector) pathIter.next());
+        moveTo((PVector) pathIter.next());
       } else {
         _handleGuardpointReach();
       }

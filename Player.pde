@@ -8,13 +8,23 @@ class Player {
   private int hp = INITIAL_HP;
   private int gold;
   private TowerGroups towers;
+  private Group<Guard> guards;
   
   Player(int initialGold, Game game) {
     this.gold = initialGold;
     this.game = game;
     this.towers = new TowerGroups(game);
+    this.guards = new Group(game);
   }
-  
+
+  public TowerGroups getTowers() {
+    return towers;
+  }
+
+  public Group<Guard> getGuards() {
+    return guards;
+  }
+
   public void drawStats() {
 
     fill(Utils.FADED_RED);
@@ -42,10 +52,18 @@ class Player {
       println("Node is occupied.");
       return;
     }
-    
-    ProjectileTower tower = new ProjectileTower(type, node, game);
-    towers.add(tower);
-    node.setTower(tower);
+
+    switch (type) {
+      case Tower.ARROW:
+        new ProjectileTower(type, node, this, game);
+        break;
+      case Tower.MELEE:
+        new GuardTower(type, node, this, game);
+        break;
+      default:
+        println("Type number " + type + " does not map to a valid tower type.");
+    }
+
   }
   
   public void receiveDmg() {
@@ -56,10 +74,6 @@ class Player {
   
   public boolean isAlive() {
     return hp > 0;
-  }
-  
-  public TowerGroups getTowers() {
-    return towers;
   }
 
   public int getHp() {
@@ -73,6 +87,18 @@ class Player {
   private void _topText(String text, int x) {
     textSize(32);
     text(text, x, TOP_TEXT_MARGIN);
+  }
+
+  public void addToGuards(Guard guard) {
+    guards.add(guard);
+  }
+
+  public void addToTowers(GuardTower tower) {
+    towers.add(tower);
+  }
+
+  public void addToTowers(ProjectileTower tower) {
+    towers.add(tower);
   }
 }
 

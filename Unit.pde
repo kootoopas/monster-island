@@ -76,8 +76,8 @@ class Unit extends CBeing {
     }
   }
   
-  public void setDest(PVector dest) {
-    movement.setDest(dest);
+  public void moveTo(PVector dest) {
+    movement.moveTo(dest);
   }
   
   public boolean destReached() {

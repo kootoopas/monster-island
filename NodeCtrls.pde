@@ -7,19 +7,12 @@ class NodeCtrls extends Being {
   private ArrayList<Button> btns;
 
   NodeCtrls(Node node, Game game) {
-    super(new HRectangle(node.getX() - SIZE / 2 + Node.SIZE / 2, node.getY() - SIZE - Node.SIZE / 3, SIZE, SIZE));
+    super(NodeCtrlsUtils._calcRectangle(node));
     this.node = node;
     this.game = game;
 
     this.btns = new ArrayList();
-    this.btns.add(
-            new NodeBuyButton(
-                    Utils.fitIn(this.getBoundingBox(), 3),
-                    Tower.ARROW,
-                    node,
-                    this.game
-            )
-    );
+    _addBtns();
   }
 
   void draw() {
@@ -46,4 +39,16 @@ class NodeCtrls extends Being {
       game.delete(btn);
     }
   }
+
+  private void _addBtns() {
+    btns.add(
+            new NodeBuyButton(
+                    Utils.fitIn(getBoundingBox(), 3),
+                    Tower.ARROW,
+                    node,
+                    game
+            )
+    );
+  }
+
 }

@@ -12,7 +12,7 @@ class Game extends CWorld {
 
   private Stage stage;
   private Combat combat;
-  Unit unit;
+//  Unit unit;
 
   Game(String stageId) {
     stage = new Stage(stageId, this);
@@ -27,7 +27,7 @@ class Game extends CWorld {
     new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
 
 //    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
-//    unit.getAnimator().setActiveAnimation(UnitAnimator.DOWNWARDS_WALK_IDX);
+//    unit.getAnimator().setActiveAnimation(0);
   }
 
   void postUpdate() {
@@ -43,7 +43,7 @@ class Game extends CWorld {
       transitionTo(new GameOver());
     }
 
-    // XXX: Auto populate all nodes with arrow towers for testing.
+//     XXX: Auto populate all nodes with arrow towers for testing.
     for (Node node : stage.getNodes().getObjects()) {
       player.buyTower(Tower.ARROW, node);
     }
@@ -78,9 +78,12 @@ class Game extends CWorld {
 
   void startWaveSeq() {
     waveSeq.start();
-    combat = new Combat(player.getTowers(), waveSeq.getCreeps(), this);
+    combat = new Combat(player.getTowers(), player.getGuards(), waveSeq.getCreeps(), this);
   }
 
+  public Path getPath() {
+    return stage.getPath();
+  }
 
   private class SpawnWaveButton extends TextButton {
 

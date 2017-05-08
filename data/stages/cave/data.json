@@ -1,24 +1,24 @@
 {
-  "initialGold": 2000,
+  "initialGold": 20000,
   "waves": [
     {
       "creeps": {
-        "peasant": 1
+        "peasant": 10
       },
       "spawntime": 0
     },
     {
       "creeps": {
-        "peasant": 5
+        "peasant": 18
       },
-      "spawntime": 15
+      "spawntime": 1
     },
     {
       "creeps": {
-        "peasant": 3,
-        "footman": 1
+        "peasant": 12,
+        "footman": 5
       },
-      "spawntime": 30
+      "spawntime": 2
     }
   ]
 }

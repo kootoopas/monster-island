@@ -4,6 +4,6 @@
   "hitrate": 200,
   "def": 20,
   "defType": "basic",
-  "spd": 2,
+  "spd": 6,
   "loot": 5
 }

@@ -3,7 +3,7 @@ interface Movement {
   static final int MOVING = 1;
   static final int INTERRUPTED = 2;
 
-  void setDest(PVector nextDest);
+  void moveTo(PVector nextDest);
   boolean destReached();
   int getDirection();
   void update();

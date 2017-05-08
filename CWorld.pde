@@ -1,10 +1,8 @@
 abstract class CWorld extends World {
-  
   private CWorldManager manager;
-  public CWorldDefaults defaults = new CWorldDefaults();
-  
+
   /**
-   * Should be only used internally by CWorldManager.
+   * Should only be used internally by CWorldManager.
    */
   public void setManager(CWorldManager manager) {
     this.manager = manager;
@@ -14,7 +12,4 @@ abstract class CWorld extends World {
     manager.transitionTo(nextWorld);
   }
 
-  public CWorldDefaults getDefaults() {
-    return defaults;
-  }
 }

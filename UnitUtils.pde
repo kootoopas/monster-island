@@ -5,6 +5,8 @@ static class UnitUtils {
   public static final int GUARD = 0;
   public static final int CREEP = 1;
 
+  public static final int GRUNT = 0;
+
   public static final int PEASANT = 100;
   public static final int FOOTMAN = 101;
 
@@ -15,6 +17,7 @@ static class UnitUtils {
 
   public static String typeToString(int type) {
     switch(type) {
+      case UnitUtils.GRUNT: return "grunt";
       case UnitUtils.PEASANT: return "peasant";
       case UnitUtils.FOOTMAN: return "footman";
       default: return "peasant";
@@ -26,6 +29,8 @@ static class UnitUtils {
       return UnitUtils.PEASANT;
     } else if (str.equals("footman")) {
       return UnitUtils.FOOTMAN;
+    } else if (str.equals("grunt")) {
+      return UnitUtils.GRUNT;
     } else {
       return UnitUtils.PEASANT;
     }

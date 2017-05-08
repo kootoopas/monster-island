@@ -41,6 +41,8 @@ class UnitMovement implements Movement {
       unit.setY(yMove + unit.getY());
     } else {
       unit.setPosition(dest);
+      unit.getAnimator()
+              .setIdle();
       destReached = true;
     }
 
@@ -48,7 +50,7 @@ class UnitMovement implements Movement {
     //       if unit.getX() > dest.x is removed the unit moves in a shaky freaky way.
   }
 
-  public void setDest(PVector nextDest) {
+  public void moveTo(PVector nextDest) {
     if (!dest.equals(nextDest)) {
       destReached = false;
       dest = nextDest;
