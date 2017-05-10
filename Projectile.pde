@@ -11,26 +11,20 @@ class Projectile extends CBeing {
   private float orientation = 0;
 
   public Projectile(ProjectileTower tower, Creep creep, Game game) {
-    super(Utils.voidRectangle(SIZE));
+    super(new HRectangle(tower.getCenter().x, tower.getCenter().y - SIZE * 0.5, SIZE, SIZE));
     this.game = game;
     this.tower = tower;
     this.creep = creep;
-
-    PVector towerCenter = tower.getCenter();
-    setX(_centerTo(towerCenter.x, Tower.SIZE));
-    setY(_centerTo(towerCenter.y, Tower.SIZE));
 
     this.game.register(this);
   }
 
   public void update() {
-    PVector pos = getCenter();
+    PVector pos = getPosition();
     PVector creepPos = creep.getCenter();
-    float creepWidth = creep.getBoundingBox().getWidth();
-    float creepHeight = creep.getBoundingBox().getHeight();
 
-    float dx = _centerTo(creepPos.x, creepWidth) - _centerTo(pos.x, Tower.SIZE);
-    float dy = _centerTo(creepPos.y, creepHeight) - _centerTo(pos.y, Tower.SIZE);
+    float dx = creepPos.x - pos.x;
+    float dy = creepPos.y - pos.y;
     float dist = sqrt(dx * dx + dy * dy);
 
     if (dist > SPD) {
@@ -54,9 +48,5 @@ class Projectile extends CBeing {
   public void draw() {
     rotate(orientation - PI - PI / 4);
     image(sprite, 0, 0);
-  }
-
-  private float _centerTo(float targetX, float targetSize) {
-    return Utils.centerTo(targetX, targetSize, SIZE);
   }
 }
