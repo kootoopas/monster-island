@@ -7,4 +7,5 @@ interface Movement {
   boolean destReached();
   int getDirection();
   void update();
+  void setSpd(float spd);
 }

@@ -1,0 +1,3 @@
+class IceTowerCombatInteractor extends AoeProjectileTowerCombatInteractor {
+
+}

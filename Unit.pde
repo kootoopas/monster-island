@@ -7,7 +7,7 @@ class Unit extends CBeing {
   protected UnitStats stats;
   protected Movement movement;
   protected UnitAnimator anim;
-  protected int dmgReceipt = 0;
+  protected UnitHealth health;
   protected UnitHpBar hpBar;
 
   protected JSONObject data;
@@ -29,6 +29,7 @@ class Unit extends CBeing {
 
     this.movement = new UnitMovement(this);
     this.anim = new UnitAnimator(this);
+    this.health = new UnitHealth(this);
 
     this.hpBar = new UnitHpBar(this, game);
     this.game.register(this);
@@ -47,15 +48,15 @@ class Unit extends CBeing {
   }
 
   public void receiveDmg(int dmg) {
-    dmgReceipt += dmg;
+    health.receiveDmg(dmg);
   }
   
   public boolean isAlive() {
-    return stats.hp - dmgReceipt > 0;
+    return health.isAlive();
   }
   
   public int getRemainingHp() {
-    return stats.hp - dmgReceipt;
+    return health.getRemainingHp();
   }
   
   protected String getDataPath() {
@@ -64,6 +65,10 @@ class Unit extends CBeing {
 
   public UnitAnimator getAnimator() {
     return anim;
+  }
+
+  public Movement getMovement() {
+    return movement;
   }
 
   private void _extractUnitData() {
