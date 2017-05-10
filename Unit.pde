@@ -102,6 +102,7 @@ class Unit extends CBeing {
   
   public void unregister() {
     game.delete(this);
+    game.delete(hpBar);
   }
   
   public String toString() {

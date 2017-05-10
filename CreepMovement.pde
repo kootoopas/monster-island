@@ -20,14 +20,14 @@ class CreepMovement extends UnitMovement {
       if (pathIter.hasNext()) {
         moveTo((PVector) pathIter.next());
       } else {
-        _handleGuardpointReach();
+        _onGuardpointReach();
       }
     }
 
     super.update();
   }
 
-  private void _handleGuardpointReach() {
+  private void _onGuardpointReach() {
     creep.dmgPlayer();
     creep.unregister();
   }
