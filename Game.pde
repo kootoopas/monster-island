@@ -43,7 +43,7 @@ class Game extends CWorld {
 
 //     XXX: Auto populate all nodes with arrow towers for testing.
     for (Node node : stage.getNodes().getObjects()) {
-      player.buyTower(Tower.ARROW, node);
+      player.buyTower(Tower.ICE, node);
     }
   }
 
@@ -54,7 +54,7 @@ class Game extends CWorld {
     player.drawStats();
     stage.drawMap();
 
-    // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objects
+    // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objectsr
     super.draw();
   }
 

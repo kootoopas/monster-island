@@ -7,4 +7,12 @@ abstract class CBeing extends Being {
   public PVector getCenter() {
     return getBoundingBox().getCenter();
   }
+
+  public float getWidth() {
+    return getBoundingBox().getWidth();
+  }
+
+  public float getHeight() {
+    return getBoundingBox().getHeight();
+  }
 }

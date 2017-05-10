@@ -55,10 +55,10 @@ class Player {
 
     switch (type) {
       case Tower.ARROW:
-        new ProjectileTower(type, node, this, game);
+        new ArrowTower(type, node, this, game);
         break;
-      case Tower.MELEE:
-        new GuardTower(type, node, this, game);
+      case Tower.ICE:
+        new IceTower(type, node, this, game);
         break;
       default:
         println("Type number " + type + " does not map to a valid tower type.");

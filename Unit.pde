@@ -8,6 +8,7 @@ class Unit extends CBeing {
   protected Movement movement;
   protected UnitAnimator anim;
   protected int dmgReceipt = 0;
+  protected UnitHpBar hpBar;
 
   protected JSONObject data;
 
@@ -29,6 +30,7 @@ class Unit extends CBeing {
     this.movement = new UnitMovement(this);
     this.anim = new UnitAnimator(this);
 
+    this.hpBar = new UnitHpBar(this, game);
     this.game.register(this);
   }
 

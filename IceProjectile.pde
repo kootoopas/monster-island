@@ -5,7 +5,7 @@ class IceProjectile extends Projectile {
   public IceProjectile(ProjectileTower tower, Creep creep, Game game) {
     super(
             new ProjectileData(
-                    assetManager.getImage("arrowProjectile"),
+                    assetManager.getImage("iceProjectile"),
                     SPD
             ),
             tower,

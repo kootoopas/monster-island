@@ -16,7 +16,7 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
 
   private int _calcHitDmg(Creep creep) {
     // TODO: Properly calculate damage based on creep.stats & tower type and stats
-    return ProjectileTower.ATK;
+    return tower.getStats().atk;
   }
 
   public void shoot(Creep creep) {
@@ -25,10 +25,13 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
     switch (tower.getType()) {
       case Tower.ARROW:
         new ArrowProjectile(tower, creep, game);
+        break;
       case Tower.ICE:
         new IceProjectile(tower, creep, game);
+        break;
       default:
         new ArrowProjectile(tower, creep, game);
+        break;
     }
   }
 
@@ -37,6 +40,6 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
   }
 
   public boolean onCooldown() {
-    return millis() < lastShot + ProjectileTower.HITRATE;
+    return millis() < lastShot + tower.getStats().hitrate;
   }
 }

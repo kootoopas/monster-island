@@ -7,8 +7,7 @@ abstract class Tower extends CBeing {
   public static final int SIZE = Node.SIZE;
 
   public static final String DIR = "towers";
-    
-  public static final int HITRATE = 400;
+
   public static final int RANGE = 130;
 
   public static final int Y_OFFSET = -49;
@@ -18,9 +17,10 @@ abstract class Tower extends CBeing {
   protected Node node;
   
   protected int type;
-  protected int lvl = 1;
   protected PImage sprite;
-  
+  protected int lvl = 1;
+  protected TowerStats stats;
+
   private color background;
   
   Tower(int type, Node node, Player player, Game game) {
@@ -31,11 +31,15 @@ abstract class Tower extends CBeing {
     this.node = node;
     
     this.type = type;
-    this.sprite = _getSpriteByType(type);
+    _setTypeProps(type);
   }
 
   public int getType() {
     return type;
+  }
+
+  public TowerStats getStats() {
+    return stats;
   }
 
   void draw() {
@@ -47,14 +51,20 @@ abstract class Tower extends CBeing {
     node.unregister();
   }
 
-  private PImage _getSpriteByType(int type) {
+  private void _setTypeProps(int type) {
     switch (type) {
       case ARROW:
-        return assetManager.getImage("arrowTower");
+        sprite = assetManager.getImage("arrowTower");
+        stats = new ArrowTowerStats();
+        break;
       case ICE:
-        return assetManager.getImage("iceTower");
+        sprite = assetManager.getImage("iceTower");
+        stats = new IceTowerStats();
+        break;
       default:
-        return new PImage();
+        sprite = assetManager.getImage("arrowTower");
+        stats = new ArrowTowerStats();
+        break;
     }
   }
 }
