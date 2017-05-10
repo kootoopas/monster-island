@@ -11,7 +11,7 @@ class Projectile extends CBeing {
   private float orientation = 0;
 
   public Projectile(ProjectileTower tower, Creep creep, Game game) {
-    super(new HRectangle(tower.getCenter().x, tower.getCenter().y - SIZE * 0.5, SIZE, SIZE));
+    super(new HRectangle(tower.getCenter().x, tower.getCenter().y + Tower.Y_OFFSET * 0.5, SIZE, SIZE));
     this.game = game;
     this.tower = tower;
     this.creep = creep;
