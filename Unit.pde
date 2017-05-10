@@ -54,7 +54,11 @@ class Unit extends CBeing {
   public boolean isAlive() {
     return health.isAlive();
   }
-  
+
+  public boolean isFrostbitten() {
+    return health.isFrostbitten();
+  }
+
   public int getRemainingHp() {
     return health.getRemainingHp();
   }

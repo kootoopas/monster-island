@@ -1,22 +1,25 @@
 class TowerGroups {
 
-  private Game game;
-
   public Group<Tower> all;
-  public Group<ProjectileTower> projectile;
+  public Group<ArrowTower> arrow;
+  public Group<IceTower> ice;
   public Group<GuardTower> guard;
 
   public TowerGroups(Game game) {
-    this.game = game;
-
     this.all = new Group(game);
-    this.projectile = new Group(game);
+    this.arrow = new Group(game);
+    this.ice = new Group(game);
     this.guard = new Group(game);
   }
 
-  public void add(ProjectileTower tower) {
+  public void add(ArrowTower tower) {
     _addToAll(tower);
-    projectile.add(tower);
+    arrow.add(tower);
+  }
+
+  public void add(IceTower tower) {
+    _addToAll(tower);
+    ice.add(tower);
   }
 
   public void add(GuardTower tower) {

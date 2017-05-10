@@ -38,4 +38,8 @@ class UnitHealth {
       movement.setSpd(stats.spd / FROSTBITE_SPD);
     }
   }
+
+  public boolean isFrostbitten() {
+    return status == FROSTBITTEN;
+  }
 }

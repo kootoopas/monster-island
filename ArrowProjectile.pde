@@ -2,9 +2,7 @@ class ArrowProjectile extends Projectile {
 
   public static final int SPD = 8;
 
-
-
-  public ArrowProjectile(ProjectileTower tower, Creep creep, Game game) {
+  public ArrowProjectile(ArrowTower tower, Creep creep, Game game) {
     super(
             new ProjectileData(
                     assetManager.getImage("arrowProjectile"),

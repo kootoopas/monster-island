@@ -97,7 +97,11 @@ class Player {
     towers.add(tower);
   }
 
-  public void addToTowers(ProjectileTower tower) {
+  public void addToTowers(IceTower tower) {
+    towers.add(tower);
+  }
+
+  public void addToTowers(ArrowTower tower) {
     towers.add(tower);
   }
 }

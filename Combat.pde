@@ -12,7 +12,7 @@ class Combat {
     this.creeps = creeps;
     this.game = game;
     
-    this.game.register(towers.projectile, creeps, new ProjectileTowerCombatInteractor());
-//    this.game.register(guards, creeps, new GuardCombatInteractor());
+    this.game.register(towers.arrow, creeps, new ArrowTowerCombatInteractor());
+    this.game.register(towers.ice, creeps, new IceTowerCombatInteractor());
   }
 }
