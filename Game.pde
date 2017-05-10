@@ -12,7 +12,6 @@ class Game extends CWorld {
 
   private Stage stage;
   private Combat combat;
-//  Unit unit;
 
   Game(String stageId) {
     stage = new Stage(stageId, this);
@@ -24,10 +23,9 @@ class Game extends CWorld {
   void setup() {
     stage.setup();
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
-    new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
+//    new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
+    startWaveSeq();
 
-//    unit = new Unit(UnitUtils.PEASANT, UnitUtils.CREEP, new PVector(300, 300), this);
-//    unit.getAnimator().setActiveAnimation(0);
   }
 
   void postUpdate() {

@@ -1,5 +1,5 @@
 class Node extends Being {
-  public static final int SIZE = 28;
+  public static final int SIZE = 50;
   
   private Game game;
   private PostOffice po;

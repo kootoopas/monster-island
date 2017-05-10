@@ -63,7 +63,8 @@ class UnitMovement implements Movement {
     int nextAnimation;
     float dy = dest.y - unit.getY();
     float dx = dest.x - unit.getX();
-    float angle = degrees(atan2(dy, dx));
+    float angle = degrees(
+            atan2(dy, dx));
 
     if (angle <= 45 && angle >= -45) {
 //      println("right");

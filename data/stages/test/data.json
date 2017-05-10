@@ -3,7 +3,7 @@
   "waves": [
     {
       "creeps": {
-        "peasant": 1
+        "peasant": 200
       },
       "spawntime": 0
     },

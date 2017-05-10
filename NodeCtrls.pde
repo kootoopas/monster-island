@@ -7,7 +7,7 @@ class NodeCtrls extends Being {
   private ArrayList<Button> btns;
 
   NodeCtrls(Node node, Game game) {
-    super(NodeCtrlsUtils._calcRectangle(node));
+    super(NodeCtrlsUtils.calcRectangle(node));
     this.node = node;
     this.game = game;
 

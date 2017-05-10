@@ -83,7 +83,7 @@ class Unit extends CBeing {
   public boolean destReached() {
     return movement.destReached();
   }
-  
+
   public void update() {
     if (isAlive()) {
       movement.update();    
@@ -94,6 +94,7 @@ class Unit extends CBeing {
   }
   
   public void draw() {
+
     image(anim.animate(), 0, 0); // draw the current animation frame
   }
   

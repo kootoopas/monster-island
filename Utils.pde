@@ -47,9 +47,12 @@ static class Utils {
   
   public static color getTowerColor(int type) {
     switch (type) {
-      case Tower.ARROW: return Utils.BANANA;
-      case Tower.MELEE: return Utils.INDIGO;
-      default: return Utils.BANANA;
+      case Tower.ARROW:
+        return Utils.BANANA;
+      case Tower.MELEE:
+        return Utils.INDIGO;
+      default:
+        return Utils.BANANA;
     }
   }
   
@@ -67,5 +70,19 @@ static class Utils {
   
   public static HRectangle voidRectangle() {
     return new HRectangle(0, 0, 0, 0);
+  }
+
+  public static HRectangle voidRectangle(int size) {
+    return new HRectangle(0, 0, size, size);
+  }
+
+  public static float centerTo(float targetX, float targetSize, float size) {
+//    println("x: " + targetX);
+//    println("size: " + targetSize);
+    return targetX + targetSize * 0.5 - size * 0.5;
+  }
+
+  public static float centerTo(float targetX, float targetSize, int size) {
+    return Utils.centerTo(targetX, targetSize, (float) size);
   }
 }

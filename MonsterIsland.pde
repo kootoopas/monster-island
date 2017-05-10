@@ -44,6 +44,12 @@ void _preloadAssets() {
           UnitUtils.WIDTH,
           UnitUtils.HEIGHT
         ));
+  assetManager.put(
+        "arrowTower",
+        loadImage(dataPath(Tower.DIR + "/arrow/tower.png")));
+  assetManager.put(
+        "arrowProjectile",
+        loadImage(dataPath(Tower.DIR + "/arrow/projectile.png")));
 }
 
 void _startGame() {
