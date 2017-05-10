@@ -21,8 +21,15 @@ class ProjectileTowerCombat implements TowerToCreepCombat {
 
   public void shoot(Creep creep) {
     registerShot();
-    // Projectile calls tower.hit(creep) on contact with creep.
-    new Projectile(tower, creep, game);
+    // Projectile calls sth similar to tower.hit(creep) on contact with creep.
+    switch (tower.getType()) {
+      case Tower.ARROW:
+        new ArrowProjectile(tower, creep, game);
+      case Tower.ICE:
+        new IceProjectile(tower, creep, game);
+      default:
+        new ArrowProjectile(tower, creep, game);
+    }
   }
 
   public void registerShot() {

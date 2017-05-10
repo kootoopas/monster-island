@@ -1,4 +1,5 @@
 abstract class Tower extends CBeing {
+
   public static final int MELEE = 0;
   public static final int ARROW = 1;
   public static final int ICE = 2;
@@ -32,7 +33,11 @@ abstract class Tower extends CBeing {
     this.type = type;
     this.sprite = _getSpriteByType(type);
   }
-  
+
+  public int getType() {
+    return type;
+  }
+
   void draw() {
     noStroke();
     image(sprite, 0, Y_OFFSET);
