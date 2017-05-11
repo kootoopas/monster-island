@@ -1,7 +1,16 @@
 Monster Island
 =============
-2D tower defense game in processing.
-![Gameplay footage GIF](https://media.giphy.com/media/xUPGcKAxaEZhQuoAta/giphy.gif)
+
+2D tower defense game running on [processing](https://processing.org/).
+
+Created with [hermes](https://github.com/rdlester/hermes) and willpower.
+
+![Gameplay footage GIF](https://media.giphy.com/media/l0Iy9m11TnKSqgXYI/giphy.gif)
+
+## creds
+
+map design & story: [Stefan Stefanovski](https://github.com/sstefanovski)
+development: yours truly
 
 ## todos
 
