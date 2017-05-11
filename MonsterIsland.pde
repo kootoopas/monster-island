@@ -7,8 +7,8 @@ import hermes.animation.*;
 import hermes.physics.*;
 import hermes.postoffice.*;
 
-static final int WINDOW_WIDTH = 544;
-static final int WINDOW_HEIGHT = 512;
+static final int WINDOW_WIDTH = 800;
+static final int WINDOW_HEIGHT = 480 + 32;
 
 CWorldManager worldManager;
 AssetManager assetManager;
@@ -62,6 +62,6 @@ void _preloadAssets() {
 
 void _startGame() {
   worldManager = new CWorldManager();
-  worldManager.setInitialWorld(new Game("test"));
+  worldManager.setInitialWorld(new Game("stage01"));
   worldManager.start();
 }

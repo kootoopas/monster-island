@@ -2,17 +2,16 @@ class UnitHealth {
   public static final int NORMAL = 0;
   public static final int FROSTBITTEN = 1;
 
-  public static final float FROSTBITE_SPD = .8f;
+  public static final float FROSTBITE_SPD = 0.3;
 
   private UnitStats stats;
-  private Movement movement;
 
   private int dmgReceipt = 0;
   private int status = NORMAL;
+  private int indctiontime;
 
   public UnitHealth(Unit unit) {
     this.stats = unit.getStats();
-    this.movement = unit.getMovement();
   }
 
   public int getRemainingHp() {
@@ -29,17 +28,17 @@ class UnitHealth {
 
   public void induceFrostbite() {
     status = FROSTBITTEN;
-    movement.setSpd(stats.spd * FROSTBITE_SPD);
+    indctiontime = millis();
   }
 
   public void liftFrostbite() {
     if (status == FROSTBITTEN) {
       status = NORMAL;
-      movement.setSpd(stats.spd / FROSTBITE_SPD);
     }
   }
 
   public boolean isFrostbitten() {
-    return status == FROSTBITTEN;
+    return status == FROSTBITTEN
+            && millis() - indctiontime < 3000;
   }
 }

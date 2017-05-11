@@ -49,7 +49,7 @@ static class Utils {
     switch (type) {
       case Tower.ARROW:
         return Utils.BANANA;
-      case Tower.MELEE:
+      case Tower.ICE:
         return Utils.INDIGO;
       default:
         return Utils.BANANA;

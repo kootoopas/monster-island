@@ -23,9 +23,7 @@ class Game extends CWorld {
   void setup() {
     stage.setup();
     waveSeq = new WaveSequence(stage.getWavedataArray(), stage.getPath(), this);
-//    new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
-    startWaveSeq();
-
+    new SpawnWaveButton(stage.getPath().getSpawnpoint(), this);
   }
 
   void postUpdate() {
@@ -42,9 +40,9 @@ class Game extends CWorld {
     }
 
 //     XXX: Auto populate all nodes with arrow towers for testing.
-    for (Node node : stage.getNodes().getObjects()) {
-      player.buyTower(Tower.ICE, node);
-    }
+//    for (Node node : stage.getNodes().getObjects()) {
+//      player.buyTower(Tower.ICE, node);
+//    }
   }
 
   void draw() {
@@ -56,10 +54,6 @@ class Game extends CWorld {
 
     // TODO: stage.drawForeground() and stage.drawBackground() would allow for beings to be displayed behind objectsr
     super.draw();
-  }
-
-  void handleEvent(Being being) {
-    println(being.getPosition());
   }
 
   void buyTower(int type, Node node) {

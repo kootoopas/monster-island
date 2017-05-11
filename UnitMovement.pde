@@ -29,12 +29,19 @@ class UnitMovement implements Movement {
   public void update() {
     if (destReached()) return;
 
+    float finalSpd;
+    if (unit.isFrostbitten()) {
+      finalSpd = spd * UnitHealth.FROSTBITE_SPD;
+    } else {
+      finalSpd = spd;
+    }
+
     float dx = dest.x - unit.getX();
     float dy = dest.y - unit.getY();
     float dist = sqrt(dx * dx + dy * dy);
 
-    if (dist > spd) {
-      float ratio = spd / dist;
+    if (dist > finalSpd) {
+      float ratio = finalSpd / dist;
       float xMove = ratio * dx;
       float yMove = ratio * dy;
       unit.setX(xMove + unit.getX());

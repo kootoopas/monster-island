@@ -43,8 +43,17 @@ class NodeCtrls extends Being {
   private void _addBtns() {
     btns.add(
             new NodeBuyButton(
-                    Utils.fitIn(getBoundingBox(), 3),
+                    Utils.fitIn(getBoundingBox(), 3, 1, 2),
                     Tower.ARROW,
+                    node,
+                    game
+            )
+    );
+
+    btns.add(
+            new NodeBuyButton(
+                    Utils.fitIn(getBoundingBox(), 3, 2 ,2),
+                    Tower.ICE,
                     node,
                     game
             )

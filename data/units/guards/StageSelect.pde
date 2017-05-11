@@ -1,0 +1,3 @@
+class StageSelect extends CWorld {
+
+}

@@ -13,9 +13,4 @@ class ArrowProjectile extends Projectile {
             game
     );
   }
-
-  protected void _onImpact() {
-    game.delete(this);
-    tower.hit(creep);
-  }
 }

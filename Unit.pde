@@ -55,6 +55,10 @@ class Unit extends CBeing {
     return health.isAlive();
   }
 
+  public void induceFrostbite() {
+    health.induceFrostbite();
+  }
+
   public boolean isFrostbitten() {
     return health.isFrostbitten();
   }
@@ -105,7 +109,6 @@ class Unit extends CBeing {
   }
   
   public void draw() {
-
     image(anim.animate(), 0, 0); // draw the current animation frame
   }
   

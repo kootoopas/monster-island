@@ -1,4 +1,4 @@
-class Projectile extends CBeing {
+abstract class Projectile extends CBeing {
 
   public static final int SIZE = 24;
 
