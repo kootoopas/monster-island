@@ -63,5 +63,8 @@ void _preloadAssets() {
 void _startGame() {
   worldManager = new CWorldManager();
   worldManager.setInitialWorld(new Game("stage01"));
+//  worldManager.setInitialWorld(new Game("stage02"));
+//  worldManager.setInitialWorld(new Game("stage03"));
+//  worldManager.setInitialWorld(new Game("stage04"));
   worldManager.start();
 }
