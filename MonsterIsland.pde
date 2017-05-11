@@ -8,7 +8,7 @@ import hermes.physics.*;
 import hermes.postoffice.*;
 
 static final int WINDOW_WIDTH = 800;
-static final int WINDOW_HEIGHT = 480 + 32;
+static final int WINDOW_HEIGHT = 512;
 
 CWorldManager worldManager;
 AssetManager assetManager;
