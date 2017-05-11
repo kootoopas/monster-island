@@ -7,6 +7,12 @@ Created with [hermes](https://github.com/rdlester/hermes) and willpower.
 
 ![Gameplay footage GIF](https://media.giphy.com/media/l0Iy9m11TnKSqgXYI/giphy.gif)
 
+## installation
+
+* Install [processing 2.2.1](https://processing.org/download/).
+* Add [hermes (processing2 release)](https://github.com/rdlester/hermes/releases) to processing's libs.
+* Run it by opening the the folder with processing and hitting play.
+
 ## creds
 
 map design & story: [Stefan Stefanovski](https://github.com/sstefanovski)
