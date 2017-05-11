@@ -1,10 +1,17 @@
+Monster Island
+=============
+2D tower defense game in processing.
+![Gameplay footage GIF](http://gph.is/2pCw3XK)
+
 ## todos
 
-* add attribution
-* add menu screen
+* proper attribution
+* menu screen
+* unlockable stages
+* lore & narrative integration
 
 ## secondary todos
 
-* add guards
+* guards
     * guard to creep combat
     * guard rallypoint
