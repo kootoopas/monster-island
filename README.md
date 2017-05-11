@@ -10,6 +10,7 @@ Created with [hermes](https://github.com/rdlester/hermes) and willpower.
 ## creds
 
 map design & story: [Stefan Stefanovski](https://github.com/sstefanovski)
+
 development: yours truly
 
 ## todos
