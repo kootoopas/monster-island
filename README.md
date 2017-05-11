@@ -11,7 +11,7 @@ Created with [hermes](https://github.com/rdlester/hermes) and patience.
 
 * Install [processing 2.2.1](https://processing.org/download/).
 * Add [hermes (processing2 release)](https://github.com/rdlester/hermes/releases) to processing's libs.
-* Run it by opening the the folder with processing and hitting play.
+* Run it by opening the folder with processing and hitting play.
 
 ## creds
 
