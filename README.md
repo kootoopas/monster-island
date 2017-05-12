@@ -6,7 +6,6 @@ Monster Island
 2D tower defense game running on [processing](https://processing.org/).
 
 Created with [hermes](https://github.com/rdlester/hermes) and patience.
-![Gameplay footage GIF](https://media.giphy.com/media/l0Iy9m11TnKSqgXYI/giphy.gif)
 
 ## installation
 
